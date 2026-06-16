@@ -3,7 +3,6 @@ import React from "react";
 const Register = () => {
   return (
     <div className="p-10">
-      <h2 className="text-2xl mb-5">Create Account</h2>
 
       <div className="mb-4">
         <label>Name</label>
