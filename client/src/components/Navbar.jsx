@@ -5,20 +5,22 @@ import logo from "../assets/transparentLogoLight-De2Z7I01.png";
 const Navbar = () => {
   return (
     <>
-      <nav className="bg-[var(--color-primary)] text-[var(--color-primary-content)] p-3 flex justify-between items-center">
-        <img src={logo} alt="Logo" className="h-12 w-auto" />
+      <nav className="bg-[var(--color-primary)] text-[var(--color-primary-content)] px-10 py-1 flex justify-between items-center">
+        <Link to="/">
+          <img src={logo} alt="Logo" className="h-12 w-auto" />
+        </Link>
 
-        <div className="flex gap-3">
+        <div className="flex items-center gap-3">
           <Link
             to="/login"
-            className="px-4 py-2 border rounded-lg hover:bg-white hover:text-[var(--color-primary)] transition"
+            className="px-3 py-1 rounded border border-transparent hover:border-white transition"
           >
             Login
           </Link>
 
           <Link
             to="/register"
-            className="px-4 py-2 border rounded-lg hover:bg-white hover:text-[var(--color-primary)] transition"
+            className="px-3 py-1 border rounded bg-white text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:border-white hover:text-white transition"
           >
             Register
           </Link>
