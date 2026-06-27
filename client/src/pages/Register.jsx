@@ -23,7 +23,7 @@ const Register = () => {
       <div className="mb-4">
         <label>Password</label>
         <input
-          type="password"
+          type="password "
           className="border w-full p-2 rounded"
         />
       </div>

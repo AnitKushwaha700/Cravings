@@ -12,8 +12,15 @@ const Navbar = () => {
 
         <div className="flex items-center gap-3">
           <Link
-            to="/login"
+            to="/"
             className="px-3 py-1 rounded border border-transparent hover:border-white transition"
+          >
+            Home
+          </Link>
+
+          <Link
+            to="/login"
+            className="px-3 py-1 border rounded bg-white text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:border-white hover:text-white transition"
           >
             Login
           </Link>
@@ -23,6 +30,13 @@ const Navbar = () => {
             className="px-3 py-1 border rounded bg-white text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:border-white hover:text-white transition"
           >
             Register
+          </Link>
+
+          <Link
+            to="/contact"
+            className="px-3 py-1 border rounded bg-white text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:border-white hover:text-white transition"
+          >
+            Contact Us
           </Link>
         </div>
       </nav>
