@@ -3,9 +3,15 @@ dotenv.config();
 
 import express from "express";
 import connectDB from "./src/config/dbConnection.config.js";
+import AuthRouter from "./src/routes/auth.router.js"
+import PublicRouter from "./src/routes/public.router.js"
 
 const app = express();
 
+app.use(express.json());
+
+app.use("/auth", AuthRouter);
+app.use("/public", PublicRouter);
 
 // Default API
 app.get("/", (req, res) => {
