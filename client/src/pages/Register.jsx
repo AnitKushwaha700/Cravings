@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import deliveryboy from "../assets/deliberyboy.png";
+import api from "../config/api.config.js";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -42,216 +43,158 @@ const Register = () => {
       phone: registerData.phone,
       password: registerData.password,
     };
+
+    try {
+      const res = await api.post("/auth/register", payload);
+      alert(res.data.message);
+    } catch (error) {
+      console.log(res?.data?.message || error.message);
+    }
   };
 
   const inputClass =
     "border p-2 rounded focus:outline-none focus:ring-2 focus:ring-(--accent)";
 
-return (
-  <div className="h-100vh bg-[var(--background)] flex items-center justify-center px-6 py-10">
-    <div className="w-full max-w-7xl bg-white rounded-3xl shadow-2xl overflow-hidden grid md:grid-cols-2">
-
-      {/* Left Section */}
-      <div className="hidden md:flex flex-col justify-center items-center bg-gradient-to-br from-[var(--secondary)] to-[var(--primary)] p-10 text-white">
-
-        <img
-          src={deliveryboy}
-          alt="Delivery Boy"
-          className="w-80 mb-8 scale-x-[-1]"
-        />
-
-        <h2 className="text-3xl font-bold">
-          Join Orbit Today
-        </h2>
-
-        <p className="text-center mt-3 text-white/90 max-w-sm">
-          Create your account and enjoy fast food delivery from your favourite
-          restaurants.
-        </p>
-
-      </div>
-
-      {/* Right Section */}
-
-      <div className="p-10">
-
-        <h1 className="text-4xl font-bold text-center text-[var(--primary)]">
-          Create Account
-        </h1>
-
-        <p className="text-center text-gray-500 mt-2 mb-8">
-          Sign up to start ordering delicious food.
-        </p>
-
-        <form
-          onSubmit={handleSubmit}
-          className="grid md:grid-cols-2 gap-5"
-        >
-
-          {/* Full Name */}
-          <div className="md:col-span-2">
-            <label className="block mb-2 font-medium">
-              Full Name
-            </label>
-
-            <input
-              type="text"
-              name="fullName"
-              value={registerData.fullName}
-              onChange={handleChange}
-              placeholder="Enter your full name"
-              className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[var(--primary)]"
-            />
-          </div>
-
-          {/* Email */}
-
-          <div>
-            <label className="block mb-2 font-medium">
-              Email
-            </label>
-
-            <input
-              type="email"
-              name="email"
-              value={registerData.email}
-              onChange={handleChange}
-              placeholder="Enter your email"
-              className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[var(--primary)]"
-            />
-          </div>
-
-          {/* Phone */}
-
-          <div>
-            <label className="block mb-2 font-medium">
-              Phone
-            </label>
-
-            <input
-              type="tel"
-              name="phone"
-              value={registerData.phone}
-              onChange={handleChange}
-              placeholder="Phone Number"
-              className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[var(--primary)]"
-            />
-          </div>
-
-          {/* Gender */}
-
-          <div>
-            <label className="block mb-2 font-medium">
-              Gender
-            </label>
-
-            <select
-              name="gender"
-              value={registerData.gender}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[var(--primary)]"
-            >
-              <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-
-          {/* DOB */}
-
-          <div>
-            <label className="block mb-2 font-medium">
-              Date of Birth
-            </label>
-
-            <input
-              type="date"
-              name="dob"
-              value={registerData.dob}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[var(--primary)]"
-            />
-          </div>
-
-          {/* Password */}
-
-          <div>
-            <label className="block mb-2 font-medium">
-              Password
-            </label>
-
-            <input
-              type="password"
-              name="password"
-              value={registerData.password}
-              onChange={handleChange}
-              placeholder="Password"
-              className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[var(--primary)]"
-            />
-          </div>
-
-          {/* Confirm Password */}
-
-          <div>
-            <label className="block mb-2 font-medium">
-              Confirm Password
-            </label>
-
-            <input
-              type="password"
-              name="confirmPassword"
-              value={registerData.confirmPassword}
-              onChange={handleChange}
-              placeholder="Confirm Password"
-              className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[var(--primary)]"
-            />
-          </div>
-
-          {validateError && (
-            <p className="md:col-span-2 text-red-500">
-              {validateError}
-            </p>
-          )}
-
-          <button
-            type="submit"
-            className="md:col-span-2 bg-[var(--primary)] hover:bg-[var(--secondary)] text-white py-3 rounded-xl font-semibold duration-300"
-          >
-            Create Account
-          </button>
-
-        </form>
-
-        <div className="border-t mt-8 pt-6 text-center space-y-2">
-
-          <p>
-            Already have an account?{" "}
-            <button
-              onClick={() => navigate("/login")}
-              className="text-[var(--primary)] font-semibold hover:underline"
-            >
-              Login
-            </button>
-          </p>
-
-          <p>
-            Need Help?{" "}
-            <button
-              onClick={() => navigate("/contact")}
-              className="text-[var(--primary)] font-semibold hover:underline"
-            >
-              Contact Us
-            </button>
-          </p>
-
+  return (
+    <>
+      <div className="min-h-[90vh] bg-linear-to-r from-(--secondary) to-(--primary) grid grid-cols-2 p-10">
+        <div className="hidden md:block">
+          <img src={deliveryboy} alt="" className="rotate-y-180" />
         </div>
+        <div className="w-2xl bg-(--background) rounded shadow p-10 flex flex-col justify-center">
+          <div className="text-xl font-semibold mb-4">Create an Account</div>
 
+          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+            {/* Full Name */}
+            <div className="col-span-2 flex flex-col gap-2">
+              <label htmlFor="fullName">Full Name</label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                value={registerData.fullName}
+                onChange={handleChange}
+                className={inputClass}
+              />
+            </div>
+
+            {/* Email */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={registerData.email}
+                onChange={handleChange}
+                className={inputClass}
+              />
+            </div>
+            {/* Phone */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="phone">Phone</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={registerData.phone}
+                onChange={handleChange}
+                className={inputClass}
+              />
+            </div>
+
+            {/* Gender */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="gender">Gender</label>
+              <select
+                id="gender"
+                name="gender"
+                value={registerData.gender}
+                onChange={handleChange}
+                className={inputClass}
+              >
+                <option value="">Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            {/* Date of Birth */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="dob">Date of Birth</label>
+              <input
+                type="date"
+                id="dob"
+                name="dob"
+                value={registerData.dob}
+                onChange={handleChange}
+                className={inputClass}
+              />
+            </div>
+
+            {/* Password */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={registerData.password}
+                onChange={handleChange}
+                className={inputClass}
+              />
+            </div>
+
+            {/* Confirm Password */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={registerData.confirmPassword}
+                onChange={handleChange}
+                className={inputClass}
+              />
+            </div>
+
+            {validateError && (
+              <p className="text-red-500 text-sm col-span-2">{validateError}</p>
+            )}
+
+            <button
+              type="submit"
+              className="col-span-2 mt-2 bg-(--primary) text-white py-2 px-4 rounded hover:bg-(--accent)"
+            >
+              Register
+            </button>
+          </form>
+
+          <div className="mt-6 text-center space-y-2">
+            <p className="text-sm">
+              Already have an account?{" "}
+              <button
+                onClick={() => navigate("/login")}
+                className="text-(--primary) hover:underline font-semibold"
+              >
+                Login here
+              </button>
+            </p>
+            <p className="text-sm">
+              Having Trouble?{" "}
+              <button
+                onClick={() => navigate("/contact")}
+                className="text-(--primary) hover:underline font-semibold"
+              >
+                Contact Us
+              </button>
+            </p>
+          </div>
+        </div>
       </div>
-
-    </div>
-  </div>
-);
+    </>
+  );
 };
 
 export default Register;

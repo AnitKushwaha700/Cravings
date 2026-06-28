@@ -1,10 +1,11 @@
-export const AutProtect = async (req, resizeBy, next) => {
+export const AuthProtect = async (req, res, next) => {
   try {
-    //controller logic
+    //Controller Logic
+
     next();
   } catch (error) {
     console.log(error.message);
-    const error = new Error("Unknown Error at Middleware");
+    const error = new Error("Unknown Error At Middleware");
     error.statusCode = 500;
     next(error);
   }

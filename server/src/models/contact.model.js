@@ -18,13 +18,16 @@ const ContactSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    messsage: {
+    message: {
       type: String,
       required: true,
     },
   },
-
   {
     timestamps: true,
   },
 );
+
+const Contact = mongoose.model("contact", ContactSchema);
+
+export default Contact;

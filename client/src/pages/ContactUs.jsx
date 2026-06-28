@@ -67,151 +67,119 @@ const ContactUs = () => {
     "border p-2 rounded focus:outline-none focus:ring-2 focus:ring-(--accent)";
 
   return (
-    <div className="h-screen bg-[var(--background)] flex items-center justify-center px-6">
-      <div className="w-full max-w-7xl h-[90vh] bg-white rounded-3xl shadow-2xl overflow-hidden grid md:grid-cols-2">
-        {/* Left Section */}
-        <div className="hidden md:flex flex-col justify-center items-center bg-gradient-to-br from-[var(--secondary)] to-[var(--primary)] p-10 text-white">
-          <img
-            src={deliveryboy}
-            alt="Delivery Boy"
-            className="w-80 mb-8 scale-x-[-1]"
-          />
-
-          <h2 className="text-3xl font-bold">We'd Love To Hear From You</h2>
-
-          <p className="text-center mt-4 text-white/90 max-w-sm">
-            Have a question, feedback, or need support? Send us a message and
-            our team will get back to you as soon as possible.
-          </p>
+    <>
+      <div className="min-h-[90vh] bg-linear-to-r from-(--secondary) to-(--primary) grid grid-cols-2 p-10">
+        <div className="hidden md:block">
+          <img src={deliveryboy} alt="" className="rotate-y-180" />
         </div>
+        <div className="w-2xl bg-(--background) rounded shadow p-10 flex flex-col justify-center">
+          <div className="text-xl font-semibold mb-4">Contact Us</div>
 
-        {/* Right Section */}
-
-        <div className="p-10">
-          <h1 className="text-4xl font-bold text-center text-[var(--primary)]">
-            Contact Us
-          </h1>
-
-          <p className="text-center text-gray-500 mt-2 mb-8">
-            We'd love to hear from you.
-          </p>
-
-          <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-5">
+          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
             {/* Full Name */}
-
-            <div>
-              <label className="block mb-2 font-medium">Full Name</label>
-
+            <div className="flex flex-col gap-2">
+              <label htmlFor="fullName">Full Name</label>
               <input
                 type="text"
+                id="fullName"
                 name="fullName"
                 value={contactData.fullName}
                 onChange={handleChange}
-                placeholder="Enter your full name"
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[var(--primary)]"
+                className={inputClass}
               />
             </div>
 
             {/* Email */}
-
-            <div>
-              <label className="block mb-2 font-medium">Email</label>
-
+            <div className="flex flex-col gap-2">
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
+                id="email"
                 name="email"
                 value={contactData.email}
                 onChange={handleChange}
-                placeholder="Enter your email"
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[var(--primary)]"
+                className={inputClass}
               />
             </div>
 
             {/* Phone */}
-
-            <div>
-              <label className="block mb-2 font-medium">Phone</label>
-
+            <div className="flex flex-col gap-2">
+              <label htmlFor="phone">Phone</label>
               <input
                 type="tel"
+                id="phone"
                 name="phone"
                 value={contactData.phone}
                 onChange={handleChange}
-                placeholder="Phone Number"
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[var(--primary)]"
+                className={inputClass}
               />
             </div>
 
             {/* Subject */}
-
-            <div>
-              <label className="block mb-2 font-medium">Subject</label>
-
+            <div className="flex flex-col gap-2">
+              <label htmlFor="subject">Subject</label>
               <input
                 type="text"
+                id="subject"
                 name="subject"
                 value={contactData.subject}
                 onChange={handleChange}
-                placeholder="Subject"
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-[var(--primary)]"
+                className={inputClass}
               />
             </div>
 
             {/* Message */}
-
-            <div className="md:col-span-2">
-              <label className="block mb-2 font-medium">Message</label>
-
+            <div className="col-span-2 flex flex-col gap-2">
+              <label htmlFor="message">Message</label>
               <textarea
-                rows="5"
+                id="message"
                 name="message"
                 value={contactData.message}
                 onChange={handleChange}
-                placeholder="Write your message..."
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 resize-none outline-none focus:ring-2 focus:ring-[var(--primary)]"
-              ></textarea>
+                rows="5"
+                className={inputClass}
+              />
             </div>
 
             {validateError && (
-              <p className="md:col-span-2 text-red-500">{validateError}</p>
+              <p className="text-red-500 text-sm col-span-2">{validateError}</p>
             )}
 
             {successMessage && (
-              <p className="md:col-span-2 text-green-600 font-medium">
+              <p className="text-green-500 text-sm col-span-2">
                 {successMessage}
               </p>
             )}
 
             <button
               type="submit"
-              className="md:col-span-2 bg-[var(--primary)] hover:bg-[var(--secondary)] text-white py-3 rounded-xl font-semibold transition duration-300"
+              className="col-span-2 mt-2 bg-(--primary) text-white py-2 px-4 rounded hover:bg-(--accent)"
             >
               Send Message
             </button>
           </form>
 
-          <div className="border-t mt-8 pt-6 text-center space-y-2">
-            <p>Want to order delicious food?</p>
-
-            <div className="flex justify-center gap-6">
+          <div className="mt-6 text-center space-y-2">
+            <p className="text-sm">
+              Want to order Delicious Food?{" "}
               <button
                 onClick={() => navigate("/login")}
-                className="text-[var(--primary)] font-semibold hover:underline"
+                className="text-(--primary) hover:underline font-semibold"
               >
                 Login
               </button>
-
+              {" | "}
               <button
                 onClick={() => navigate("/register")}
-                className="text-[var(--primary)] font-semibold hover:underline"
+                className="text-(--primary) hover:underline font-semibold"
               >
                 Register
               </button>
-            </div>
+            </p>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
