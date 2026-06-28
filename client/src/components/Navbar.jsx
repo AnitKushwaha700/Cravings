@@ -5,7 +5,7 @@ import logo from "../assets/transparentLogoLight-De2Z7I01.png";
 const Navbar = () => {
   return (
     <>
-      <nav className="bg-[var(--color-primary)] text-[var(--color-primary-content)] px-10 py-1 flex justify-between items-center">
+      <nav className="bg-[var(--primary)] text-[var(--primary-text)] px-10 py-1 flex justify-between items-center">
         <Link to="/">
           <img src={logo} alt="Logo" className="h-12 w-auto" />
         </Link>
@@ -20,21 +20,21 @@ const Navbar = () => {
 
           <Link
             to="/login"
-            className="px-3 py-1 border rounded bg-white text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:border-white hover:text-white transition"
+            className="px-3 py-1 rounded border border-transparent hover:border-white transition"
           >
             Login
           </Link>
 
           <Link
             to="/register"
-            className="px-3 py-1 border rounded bg-white text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:border-white hover:text-white transition"
+            className="px-3 py-1 rounded border border-transparent hover:border-white transition"
           >
             Register
           </Link>
 
           <Link
-            to="/contact"
-            className="px-3 py-1 border rounded bg-white text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:border-white hover:text-white transition"
+            to="/contactUs"
+            className="px-3 py-1 rounded border border-transparent hover:border-white transition"
           >
             Contact Us
           </Link>
