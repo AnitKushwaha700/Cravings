@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import deliveryboy from "../assets/deliberyboy.png";
+import foodTable from "../assets/foodTable.webp";
 import api from "../config/api.config.js";
 
 const Register = () => {
@@ -57,14 +57,21 @@ const Register = () => {
 
   return (
     <>
-      <div className="min-h-[90vh] bg-linear-to-r from-(--secondary) to-(--primary) grid grid-cols-2 p-10">
-        <div className="hidden md:block">
-          <img src={deliveryboy} alt="" className="rotate-y-180" />
-        </div>
-        <div className="w-2xl bg-(--background) rounded shadow p-10 flex flex-col justify-center">
-          <div className="text-xl font-semibold mb-4">Create an Account</div>
+      <div
+        className="min-h-[90vh] grid grid-cols-2 items-center p-10 "
+        style={{ backgroundImage: `url(${foodTable})` }}
+      >
+        {/* Card */}
+        <div className="col-start-3 w-full max-w-xl bg-[var(--background)] rounded-xl shadow-2xl p-10">
+          <div className="text-2xl font-bold mb-1 text-center text-[var(--primary)]">
+            Create an Account
+          </div>
 
-          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+          <div className="text-md text-gray-500 mb-4 text-center ">
+            Join us as a Customer, Restaurant, or Rider
+          </div>  
+
+          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-2">
             {/* Full Name */}
             <div className="col-span-2 flex flex-col gap-2">
               <label htmlFor="fullName">Full Name</label>

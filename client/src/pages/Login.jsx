@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import deliveryboy from "../assets/deliberyboy.png";
+import foodTable from "../assets/foodTable.webp";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -36,13 +36,18 @@ const Login = () => {
 
   return (
     <>
-      <div className="min-h-[90vh] bg-linear-to-r from-(--secondary) to-(--primary) grid grid-cols-2 p-10">
-        <div className="hidden md:block">
-          <img src={deliveryboy} alt="" className="rotate-y-180" />
-        </div>
-        <div className="w-2xl bg-(--background) rounded shadow p-10 flex flex-col justify-center">
-          <div className="text-xl font-semibold mb-4">Welcome Back!</div>
-
+      <div
+        className="min-h-[90vh] grid grid-cols-2 items-center p-10 "
+        style={{ backgroundImage: `url(${foodTable})` }}
+      >
+        {/* Card */}
+        <div className="w-full max-w-md bg-(--background) rounded-xl shadow-2xl p-10">
+          <div className="text-3xl font-bold mb-2 text-center text-[var(--primary)]">
+            Welcome Back
+          </div>
+          <div className="text-md text-gray-500 mb-4 text-center ">
+            Login to your Cravings account
+          </div>
           <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
             {/* Email */}
             <div className="col-span-2 flex flex-col gap-2">

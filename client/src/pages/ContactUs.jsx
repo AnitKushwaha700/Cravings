@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import deliveryboy from "../assets/deliberyboy.png";
+import foodTable from "../assets/foodTable.webp";
 
 const ContactUs = () => {
   const navigate = useNavigate();
@@ -68,14 +68,18 @@ const ContactUs = () => {
 
   return (
     <>
-      <div className="min-h-[90vh] bg-linear-to-r from-(--secondary) to-(--primary) grid grid-cols-2 p-10">
-        <div className="hidden md:block">
-          <img src={deliveryboy} alt="" className="rotate-y-180" />
-        </div>
-        <div className="w-2xl bg-(--background) rounded shadow p-10 flex flex-col justify-center">
-          <div className="text-xl font-semibold mb-4">Contact Us</div>
-
-          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+      <div
+        className="min-h-[90vh] bg-linear-to-r from-(--secondary) to-(--primary) p-10"
+        style={{ backgroundImage: `url(${foodTable})` }}
+      >
+        <div className="w-full max-w-lg bg-[var(--background)] rounded-xl shadow-2xl p-10">
+          <div className="text-3xl font-bold mb-2 text-center text-[var(--primary)]">
+            Contact Us
+          </div>
+          <div className="text-md text-gray-500 mb-4 text-center ">
+            Have questions or feedback? Reach out to us!
+          </div>
+          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-2">
             {/* Full Name */}
             <div className="flex flex-col gap-2">
               <label htmlFor="fullName">Full Name</label>
@@ -158,7 +162,6 @@ const ContactUs = () => {
               Send Message
             </button>
           </form>
-
           <div className="mt-6 text-center space-y-2">
             <p className="text-sm">
               Want to order Delicious Food?{" "}
