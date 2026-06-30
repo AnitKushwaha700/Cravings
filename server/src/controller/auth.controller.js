@@ -64,7 +64,7 @@ export const LoginUser = async (req, res, next) => {
       return next(error);
     }
 
-    res.status(200).json({
+    res.status(201).json({
       message: "Welcome Back",
       data: existingUser,
     });

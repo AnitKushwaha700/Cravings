@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import foodTable from "../assets/foodTable.webp";
 import api from "../config/api.config.js";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -46,7 +47,8 @@ const Register = () => {
 
     try {
       const res = await api.post("/auth/register", payload);
-      alert(res.data.message);
+      console.log("Registration Successfull :", res.data);
+      toast.success(res.data.message);
     } catch (error) {
       console.log(res?.data?.message || error.message);
     }
@@ -69,7 +71,7 @@ const Register = () => {
 
           <div className="text-md text-gray-500 mb-4 text-center ">
             Join us as a Customer, Restaurant, or Rider
-          </div>  
+          </div>
 
           <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-2">
             {/* Full Name */}
