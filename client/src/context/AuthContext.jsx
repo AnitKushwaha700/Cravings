@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 
-export const AuthContext = React.createContext;
+export const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState();
-  const [islogin, setIslogin] = useState(false);
+  const [user, setUser] = useState([]);
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     // if (user) {
@@ -13,14 +13,14 @@ export const AuthProvider = ({ children }) => {
     //   setIslogin(false);
     // }
 
-    setIslogin(!!user);
+    setIsLogin(!!user);
   }, [user]);
 
   const value = {
-    user,
+    user, 
     setUser,
-    islogin,
-    setIslogin,
+    isLogin,
+    setIsLogin,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
