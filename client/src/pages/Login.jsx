@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import foodTable from "../assets/foodTable.webp";
 import api from "../config/api.config.js";
 import toast from "react-hot-toast";
+import { useAuth } from "../context/AuthContext.jsx";
 
 const Login = () => {
+  const { setUser, setIslogin } = useAuth();
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
     email: "",
@@ -23,7 +25,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle login logic here, e.g., send loginData to the server
-    //Validate loginData
+    // Validate loginData
 
     console.log("Login data submitted:", loginData);
 
@@ -36,7 +38,11 @@ const Login = () => {
       const res = await api.post("/auth/login", payload);
       console.log("Login successful:", res.data);
       toast.success(res.data.message);
-      // navigate("/");
+      sessionStorage.setItem("userData", JSON.stringify(res.data.data));
+      setUser(res.data.data);
+      setIslogin(true);
+
+      navigate("/user/dashboard");
     } catch (error) {
       // console.error("Login failed:", error);
       toast.error(error.response?.data?.message || error.message);
