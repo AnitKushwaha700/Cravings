@@ -1,6 +1,5 @@
 import React from "react";
 import { MdOutlineDashboard, MdOutlineFastfood } from "react-icons/md";
-import { FaFolderOpen } from "react-icons/fa";
 import { BsCalendar2HeartFill } from "react-icons/bs";
 import { TbSettingsBolt } from "react-icons/tb";
 

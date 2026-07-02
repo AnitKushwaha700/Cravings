@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth } from "../../context/AuthContext.jsx";
 
-const settings = () => {
+const Settings = () => {
   const { user } = useAuth();
   return (
     <>
@@ -15,4 +15,4 @@ const settings = () => {
   );
 };
 
-export default settings;
+export default Settings;

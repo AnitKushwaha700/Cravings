@@ -34,9 +34,10 @@ export const RegisterUser = async (req, res, next) => {
     });
 
     res.status(201).json({ message: "User Created Successfully" });
+    data: newUser;
   } catch (error) {
     console.log(error.message);
-    next();
+    next(error);
   }
 };
 
@@ -64,7 +65,7 @@ export const LoginUser = async (req, res, next) => {
       return next(error);
     }
 
-    res.status(201).json({
+    res.status(200).json({
       message: "Welcome Back",
       data: existingUser,
     });
