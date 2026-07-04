@@ -15,3 +15,7 @@
   --background: #FFF7ED;
   --text: #1F2937;
 }
+
+button{
+  cursor: pointer;
+}
