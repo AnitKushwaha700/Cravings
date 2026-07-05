@@ -55,8 +55,7 @@ const Register = () => {
   };
 
   const inputClass =
-    "border p-2 rounded focus:outline-none focus:ring-2 focus:ring-(--accent)";
-
+    "border p-2 rounded focus:outline-none focus:ring-2";
   return (
     <>
       <div
@@ -174,7 +173,8 @@ const Register = () => {
 
             <button
               type="submit"
-              className="col-span-2 mt-2 bg-(--primary) text-white py-2 px-4 rounded hover:bg-(--accent)"
+              className="col-span-2 mt-2 rounded py-2 px-4 text-white"
+              style={{ backgroundColor: "var(--primary)" }}
             >
               Register
             </button>
@@ -185,7 +185,8 @@ const Register = () => {
               Already have an account?{" "}
               <button
                 onClick={() => navigate("/login")}
-                className="text-(--primary) hover:underline font-semibold"
+                className="font-semibold hover:underline"
+                style={{ color: "var(--primary)" }}
               >
                 Login here
               </button>
@@ -193,8 +194,9 @@ const Register = () => {
             <p className="text-sm">
               Having Trouble?{" "}
               <button
-                onClick={() => navigate("/contact")}
-                className="text-(--primary) hover:underline font-semibold"
+                onClick={() => navigate("/contactUs")}
+                className="font-semibold hover:underline"
+                style={{ color: "var(--primary)" }}
               >
                 Contact Us
               </button>

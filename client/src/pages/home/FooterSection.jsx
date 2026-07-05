@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/circleLogo-DpCri5UD.png";
+import logo from "../../assets/circleLogo-DpCri5UD.png";
 
-const Footer = () => {
+const FooterSection = () => {
   return (
     <footer className="bg-[var(--text)] px-6 py-16 text-[var(--text-white)] lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -65,4 +65,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default FooterSection;

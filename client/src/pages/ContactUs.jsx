@@ -172,7 +172,8 @@ const ContactUs = () => {
 
             <button
               type="submit"
-              className="col-span-2 mt-2 bg-(--primary) text-white py-2 px-4 rounded hover:bg-(--accent)"
+              className="col-span-2 mt-2 rounded py-2 px-4 text-white"
+              style={{ backgroundColor: "var(--primary)" }}
             >
               Send Message
             </button>
@@ -182,14 +183,16 @@ const ContactUs = () => {
               Want to order Delicious Food?{" "}
               <button
                 onClick={() => navigate("/login")}
-                className="text-(--primary) hover:underline font-semibold"
+                className="font-semibold hover:underline"
+                style={{ color: "var(--primary)" }}
               >
                 Login
               </button>
               {" | "}
               <button
                 onClick={() => navigate("/register")}
-                className="text-(--primary) hover:underline font-semibold"
+                className="font-semibold hover:underline"
+                style={{ color: "var(--primary)" }}
               >
                 Register
               </button>

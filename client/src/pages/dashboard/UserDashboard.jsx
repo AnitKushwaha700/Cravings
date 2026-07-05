@@ -9,19 +9,17 @@ import Settings from "../../components/userDashboard/Settings.jsx";
 const UserDashboard = () => {
   const [active, setActive] = useState("Overview");
   return (
-    <>
-      <div className="flex h-[92vh]">
-        <div className="w-1/6 border-e-2 border-gray-500 h-full">
-          <Sidebar active={active} setActive={setActive} />
-        </div>
-        <div className="5/6 p-4 h-full">
-          {active === "Overview" && <Overview />}
-          {active === "Orders" && <Orders />}
-          {active === "Wishlist" && <Wishlist />}
-          {active === "Settings" && <Settings />}
-        </div>
-      </div>
-    </>
+    <div className="flex min-h-[92vh] bg-[var(--background)]">
+      <aside className="w-1/6 border-r border-gray-200 bg-[var(--surface)] p-4">
+        <Sidebar active={active} setActive={setActive} />
+      </aside>
+      <main className="w-5/6 p-6">
+        {active === "Overview" && <Overview />}
+        {active === "Orders" && <Orders />}
+        {active === "Wishlist" && <Wishlist />}
+        {active === "Settings" && <Settings />}
+      </main>
+    </div>
   );
 };
 

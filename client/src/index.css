@@ -2,20 +2,144 @@
 @plugin "daisyui";
 
 :root {
-  --primary: #EA580C;
-  --primary-text: #FFFFFF;
+  --primary: #ef4444;
+  --primary-hover: #dc2626;
+  --secondary: #f97316;
+  --accent: #facc15;
 
-  --secondary: #FB923C;
-  --accent: #FACC15;
+  --background: #fff7f7;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
 
-  --success: #16A34A;
-  --error: #DC2626;
-  --warning: #EAB308;
+  --text: #1f2937;
+  --text-light: #6b7280;
+  --text-white: #ffffff;
 
-  --background: #FFF7ED;
-  --text: #1F2937;
+  --border: #e5e7eb;
+
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+
+  --shadow: rgba(0, 0, 0, 0.12);
+  --radius: 12px;
 }
 
-button{
+.theme-red {
+  --primary: #ef4444;
+  --primary-hover: #dc2626;
+  --secondary: #f97316;
+  --accent: #fde047;
+  --background: #fff7f7;
+  --surface: #ffffff;
+  --surface-2: #fff1f2;
+  --text: #1f2937;
+  --text-light: #6b7280;
+  --text-white: #ffffff;
+  --border: #e5e7eb;
+}
+
+.theme-orange {
+  --primary: #f97316;
+  --primary-hover: #ea580c;
+  --secondary: #fb923c;
+  --accent: #fde047;
+  --background: #fffaf5;
+  --surface: #ffffff;
+  --surface-2: #ffedd5;
+  --text: #1f2937;
+  --text-light: #6b7280;
+  --text-white: #ffffff;
+  --border: #fed7aa;
+}
+
+.theme-green {
+  --primary: #16a34a;
+  --primary-hover: #15803d;
+  --secondary: #22c55e;
+  --accent: #84cc16;
+  --background: #f7fff8;
+  --surface: #ffffff;
+  --surface-2: #dcfce7;
+  --text: #1f2937;
+  --text-light: #6b7280;
+  --text-white: #ffffff;
+  --border: #bbf7d0;
+}
+
+.theme-blue {
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --secondary: #38bdf8;
+  --accent: #67e8f9;
+  --background: #f0f9ff;
+  --surface: #ffffff;
+  --surface-2: #e0f2fe;
+  --text: #1f2937;
+  --text-light: #6b7280;
+  --text-white: #ffffff;
+  --border: #bae6fd;
+}
+
+.theme-purple {
+  --primary: #7c3aed;
+  --primary-hover: #6d28d9;
+  --secondary: #a855f7;
+  --accent: #c084fc;
+  --background: #faf5ff;
+  --surface: #ffffff;
+  --surface-2: #f3e8ff;
+  --text: #1f2937;
+  --text-light: #6b7280;
+  --text-white: #ffffff;
+  --border: #ddd6fe;
+}
+
+.theme-coffee {
+  --primary: #7c4a2d;
+  --primary-hover: #5b341d;
+  --secondary: #a16207;
+  --accent: #fbbf24;
+  --background: #fdf8f4;
+  --surface: #ffffff;
+  --surface-2: #f5ebe0;
+  --text: #2d1b12;
+  --text-light: #6b7280;
+  --text-white: #ffffff;
+  --border: #e7d3c1;
+}
+
+.theme-dark {
+  --primary: #ef4444;
+  --primary-hover: #dc2626;
+  --secondary: #f97316;
+  --accent: #facc15;
+  --background: #111827;
+  --surface: #1f2937;
+  --surface-2: #374151;
+  --text: #f9fafb;
+  --text-light: #d1d5db;
+  --text-white: #ffffff;
+  --border: #4b5563;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button {
   cursor: pointer;
 }

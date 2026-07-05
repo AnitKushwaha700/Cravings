@@ -1,95 +1,90 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/transparentLogoLight-De2Z7I01.png";
 import { useAuth } from "../context/AuthContext.jsx";
 import { AiOutlineLogout } from "react-icons/ai";
+import { FiMoon, FiSun } from "react-icons/fi";
 import api from "../config/api.config.js";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, setUser, isLogin, setIsLogin } = useAuth();
   const navigate = useNavigate();
+  const [theme, setTheme] = useState(() => localStorage.getItem("cravings-theme") || "theme-red");
+
+  useEffect(() => {
+    document.documentElement.className = theme;
+    localStorage.setItem("cravings-theme", theme);
+  }, [theme]);
 
   const handleLogout = async () => {
     try {
       const res = await api.get("/auth/logout");
+      sessionStorage.removeItem("userData");
       sessionStorage.removeItem("UserData");
       setIsLogin(false);
-      setUser(false);
+      setUser(null);
       navigate("/");
       toast.success(res.data.message);
     } catch (error) {
       toast.error(
-        error.response.status + " | " + error.response?.data?.message ||
+        error.response?.status + " | " + error.response?.data?.message ||
           error.message,
       );
     }
   };
 
   return (
-    <>
-      <nav className="bg-[var(--primary)] text-[var(--primary-text)] px-10 py-1 flex justify-between items-center">
-        <Link to="/">
-          <img src={logo} alt="Logo" className="h-12 w-auto" />
+    <nav className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)] text-[var(--text-white)] shadow-lg">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+        <Link to="/" className="flex items-center">
+          <img src={logo} alt="Cravings logo" className="h-11 w-auto" />
         </Link>
 
-        <div className="flex items-center gap-3">
-          <Link
-            to="/"
-            className="px-3 py-1 rounded border border-transparent hover:border-white transition"
-          >
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Link to="/" className="rounded-full px-3 py-1.5 text-sm font-medium transition hover:bg-white/10">
             Home
           </Link>
 
+          <button
+            onClick={() => setTheme(theme === "theme-red" ? "theme-dark" : "theme-red")}
+            className="rounded-full border border-white/20 p-2 transition hover:bg-white/10"
+            aria-label="Toggle theme"
+          >
+            {theme === "theme-red" ? <FiMoon /> : <FiSun />}
+          </button>
+
           {isLogin ? (
-            <div className="border-s-2 flex justify-center items-center gap-4 px-4">
-              <div className="w-8 h-8 rounded-full overflow-hidden">
-                <img
-                  src={user.photo}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
+            <div className="flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-3 py-1.5">
+              <div className="h-8 w-8 overflow-hidden rounded-full">
+                <img src={user.photo} alt="User" className="h-full w-full object-cover" />
               </div>
-              <Link
-                to={"/user/dashboard"}
-                className="hover:underline hover:text-(--accent)"
-              >
+              <Link to="/user/dashboard" className="text-sm font-medium hover:text-[var(--accent)]">
                 {user.fullName}
               </Link>
               <button
                 onClick={handleLogout}
-                className="hover:bg-white hover:text-[var(--primary)]  rounded-2xl p-2 text-xl"
+                className="rounded-full p-2 text-lg transition hover:bg-white/10"
               >
                 <AiOutlineLogout />
               </button>
             </div>
           ) : (
             <>
-              <Link
-                to="/login"
-                className="px-3 py-1 rounded border border-transparent hover:border-white transition"
-              >
+              <Link to="/login" className="rounded-full px-3 py-1.5 text-sm font-medium transition hover:bg-white/10">
                 Login
               </Link>
-
-              <Link
-                to="/register"
-                className="px-3 py-1 rounded border border-transparent hover:border-white transition"
-              >
+              <Link to="/register" className="rounded-full px-3 py-1.5 text-sm font-medium transition hover:bg-white/10">
                 Register
               </Link>
-
-              <Link
-                to="/contactUs"
-                className="px-3 py-1 rounded border border-transparent hover:border-white transition"
-              >
+              <Link to="/contactUs" className="rounded-full px-3 py-1.5 text-sm font-medium transition hover:bg-white/10">
                 Contact Us
               </Link>
             </>
           )}
         </div>
-      </nav>
-    </>
+      </div>
+    </nav>
   );
 };
 

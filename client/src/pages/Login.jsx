@@ -50,7 +50,7 @@ const Login = () => {
   };
 
   const inputClass =
-    "border p-2 rounded focus:outline-none focus:ring-2 focus:ring-(--accent)";
+    "border p-2 rounded focus:outline-none focus:ring-2";
 
   return (
     <>
@@ -99,7 +99,8 @@ const Login = () => {
 
             <button
               type="submit"
-              className="col-span-2 mt-2 bg-(--primary) text-white py-2 px-4 rounded hover:bg-(--accent)"
+              className="col-span-2 mt-2 rounded py-2 px-4 text-white"
+              style={{ backgroundColor: "var(--primary)" }}
             >
               Login
             </button>
@@ -110,7 +111,8 @@ const Login = () => {
               Don't have an account?{" "}
               <button
                 onClick={() => navigate("/register")}
-                className="text-(--primary) hover:underline font-semibold"
+                className="font-semibold hover:underline"
+                style={{ color: "var(--primary)" }}
               >
                 Register here
               </button>
@@ -119,7 +121,8 @@ const Login = () => {
               Having Trouble?{" "}
               <button
                 onClick={() => navigate("/contact")}
-                className="text-(--primary) hover:underline font-semibold"
+                className="font-semibold hover:underline"
+                style={{ color: "var(--primary)" }}
               >
                 Contact Us
               </button>
