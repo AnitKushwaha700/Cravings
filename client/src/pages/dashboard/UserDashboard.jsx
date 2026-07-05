@@ -10,7 +10,7 @@ const UserDashboard = () => {
   const [active, setActive] = useState("Overview");
   return (
     <div className="flex min-h-[92vh] bg-[var(--background)]">
-      <aside className="w-1/6 border-r border-gray-200 bg-[var(--surface)] p-4">
+      <aside className="w-1/6 border-r border-gray-200 bg-[var(--surface)] px-4 pt-7">
         <Sidebar active={active} setActive={setActive} />
       </aside>
       <main className="w-5/6 p-6">

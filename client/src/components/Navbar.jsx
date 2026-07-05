@@ -10,7 +10,9 @@ import toast from "react-hot-toast";
 const Navbar = () => {
   const { user, setUser, isLogin, setIsLogin } = useAuth();
   const navigate = useNavigate();
-  const [theme, setTheme] = useState(() => localStorage.getItem("cravings-theme") || "theme-red");
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("cravings-theme") || "theme-red",
+  );
 
   useEffect(() => {
     document.documentElement.className = theme;
@@ -36,30 +38,25 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)] text-[var(--text-white)] shadow-lg">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-full items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link to="/" className="flex items-center">
           <img src={logo} alt="Cravings logo" className="h-11 w-auto" />
         </Link>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <Link to="/" className="rounded-full px-3 py-1.5 text-sm font-medium transition hover:bg-white/10">
-            Home
-          </Link>
-
-          <button
-            onClick={() => setTheme(theme === "theme-red" ? "theme-dark" : "theme-red")}
-            className="rounded-full border border-white/20 p-2 transition hover:bg-white/10"
-            aria-label="Toggle theme"
-          >
-            {theme === "theme-red" ? <FiMoon /> : <FiSun />}
-          </button>
-
           {isLogin ? (
             <div className="flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-3 py-1.5">
               <div className="h-8 w-8 overflow-hidden rounded-full">
-                <img src={user.photo} alt="User" className="h-full w-full object-cover" />
+                <img
+                  src={user.photo}
+                  alt="User"
+                  className="h-full w-full object-cover"
+                />
               </div>
-              <Link to="/user/dashboard" className="text-sm font-medium hover:text-[var(--accent)]">
+              <Link
+                to="/user/dashboard"
+                className="text-sm font-medium hover:text-[var(--accent)]"
+              >
                 {user.fullName}
               </Link>
               <button
@@ -71,15 +68,39 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <Link to="/login" className="rounded-full px-3 py-1.5 text-sm font-medium transition hover:bg-white/10">
+              <Link
+                to="/"
+                className="rounded-md px-3 py-1.5 text-sm font-medium transition hover:border"
+              >
+                Home
+              </Link>
+              <Link
+                to="/login"
+                className="rounded-full px-3 py-1.5 text-sm font-medium transition hover:bg-white/10"
+              >
                 Login
               </Link>
-              <Link to="/register" className="rounded-full px-3 py-1.5 text-sm font-medium transition hover:bg-white/10">
+              <Link
+                to="/register"
+                className="rounded-full px-3 py-1.5 text-sm font-medium transition hover:bg-white/10"
+              >
                 Register
               </Link>
-              <Link to="/contactUs" className="rounded-full px-3 py-1.5 text-sm font-medium transition hover:bg-white/10">
+              <Link
+                to="/contactUs"
+                className="rounded-full px-3 py-1.5 text-sm font-medium transition hover:bg-white/10"
+              >
                 Contact Us
               </Link>
+              <button
+                onClick={() =>
+                  setTheme(theme === "theme-red" ? "theme-dark" : "theme-red")
+                }
+                className="rounded-full border border-white/20 p-2 transition hover:bg-white/10"
+                aria-label="Toggle theme"
+              >
+                {theme === "theme-red" ? <FiMoon /> : <FiSun />}
+              </button>
             </>
           )}
         </div>

@@ -85,10 +85,10 @@ const Settings = () => {
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
-        <div className="space-y-6 rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm">
-          <div className="flex items-center gap-4">
-            <div className="h-24 w-24 overflow-hidden rounded-full border-2 border-[var(--primary)] bg-white">
+      <div className="grid gap-6  lg:grid-cols-[360px_1fr]">
+        <div className="space-y-6 flex rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm">
+          <div className="flex items-center gap-4 ">
+            <div className="h-30 w-30 overflow-hidden rounded-full border-2 border-[var(--primary)] bg-white">
               <img src={user.photo} alt="Profile" className="h-full w-full object-cover" />
             </div>
             <div>
@@ -96,22 +96,11 @@ const Settings = () => {
               <p className="text-sm text-[var(--text-light)]">Cravings customer</p>
             </div>
           </div>
-          <div className="space-y-2 rounded-3xl bg-[var(--surface-2)] p-4">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">Account status</p>
-            <p className="text-sm text-[var(--text-light)]">Your profile is active and ready for orders.</p>
-          </div>
-          <div className="space-y-3 rounded-3xl bg-[var(--surface-2)] p-4">
-            <p className="text-sm font-semibold text-[var(--text)]">Quick links</p>
-            <div className="grid gap-2 text-sm text-[var(--text-light)]">
-              <button className="text-left rounded-2xl bg-[var(--background)] px-4 py-3 transition hover:bg-[var(--surface)]">Manage addresses</button>
-              <button className="text-left rounded-2xl bg-[var(--background)] px-4 py-3 transition hover:bg-[var(--surface)]">View orders</button>
-            </div>
-          </div>
         </div>
 
         <div className="space-y-6 rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm">
           <div className="grid gap-4 rounded-3xl bg-[var(--surface-2)] p-6">
-            <div className="grid gap-2">
+            <div className="flex gap-3 whitespace-nowrap items-center">
               <label className="text-sm font-medium text-[var(--text-light)]">Full Name</label>
               <input
                 type="text"
@@ -119,20 +108,20 @@ const Settings = () => {
                 value={tempUser.fullName || ""}
                 onChange={handleChange}
                 disabled={!isEditable}
-                className="w-full rounded-2xl border border-[var(--border)] bg-white px-4 py-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--primary)] disabled:cursor-not-allowed disabled:bg-[var(--surface-2)]"
+                className="w-full rounded-md border border-[var(--border)] bg-white px-4 py-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--primary)] disabled:cursor-not-allowed disabled:bg-[var(--surface-2)]"
               />
             </div>
-            <div className="grid gap-2">
+            <div className="flex gap-10 whitespace-nowrap items-center">
               <label className="text-sm font-medium text-[var(--text-light)]">Email</label>
               <input
                 type="email"
                 name="email"
                 value={tempUser.email || ""}
                 disabled
-                className="w-full rounded-2xl border border-[var(--border)] bg-[var(--surface-2)] px-4 py-3 text-sm text-[var(--text-light)] outline-none"
+                className="w-full rounded-md border border-[var(--border)] bg-[var(--surface-2)] px-4 py-3 text-sm text-[var(--text-light)] outline-none"
               />
             </div>
-            <div className="grid gap-2">
+            <div className="flex gap-9 whitespace-nowrap items-center">
               <label className="text-sm font-medium text-[var(--text-light)]">Phone</label>
               <input
                 type="number"
@@ -140,17 +129,9 @@ const Settings = () => {
                 value={tempUser.phone || ""}
                 onChange={handleChange}
                 disabled={!isEditable}
-                className="w-full rounded-2xl border border-[var(--border)] bg-white px-4 py-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--primary)] disabled:cursor-not-allowed disabled:bg-[var(--surface-2)]"
+                className="w-full rounded-md border border-[var(--border)] bg-white px-4 py-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--primary)] disabled:cursor-not-allowed disabled:bg-[var(--surface-2)]"
               />
             </div>
-          </div>
-
-          <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface-2)] p-6">
-            <p className="text-sm font-semibold text-[var(--text)]">Address Book</p>
-            <p className="mt-2 text-sm text-[var(--text-light)]">No addresses added yet. Add your address to save delivery details for faster checkout.</p>
-            <button className="mt-4 inline-flex items-center justify-center rounded-full bg-[var(--primary)] px-5 py-3 text-sm font-semibold text-[var(--text-white)] transition hover:bg-[var(--primary-hover)]">
-              Add Your First Address
-            </button>
           </div>
         </div>
       </div>
