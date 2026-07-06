@@ -1,14 +1,21 @@
 import React, { useState } from "react";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/AuthContext.jsx";
 import api from "../../config/api.config.js";
 import toast from "react-hot-toast";
 import { MdEdit } from "react-icons/md";
+import { MdOutlineAddAPhoto } from "react-icons/md";
 
 const Settings = () => {
   const { user, setUser } = useAuth();
 
   const [isEditable, setIsEditable] = useState(false);
   const [tempUser, setTempUser] = useState(user || {});
+  const [profilePicPreview, setProfilePicPreview] = useState({
+    fullName: user?.fullName || "",
+    email: user?.email.toLowerCase || "",
+    phone: user?.phone || "",
+    phone: user?.photo.url || "https://placehold.co/600x400?text=",
+  });
 
   React.useEffect(() => {
     setTempUser(user || {});
@@ -34,13 +41,22 @@ const Settings = () => {
     try {
       const res = await api.put("/user/edit-profile", payLoad);
       setUser(res.data.data);
+      setIsEditable(false);
       toast.success(res.data.message);
     } catch (error) {
       toast.error(
-        error.response.status + " | " + error.response?.data?.message ||
-          error.message,
+        `${error.response?.status || ""} | ${
+          error.response?.data?.message || error.message
+        }`,
       );
     }
+  };
+
+  const handleProfilePictureChange = (e) => {
+    const file = e.target.files[0];
+    const fileURL = URL.createObjectURL(file);
+
+    setProfilePicPreview(fileURL);
   };
 
   return (
@@ -54,14 +70,18 @@ const Settings = () => {
             Your account details
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--text-light)]">
-            Update your profile, keep your contact details current, and manage your account information.
+            Update your profile, keep your contact details current, and manage
+            your account information.
           </p>
         </div>
         <div className="flex flex-wrap gap-3">
           {isEditable ? (
             <>
               <button
-                onClick={() => setIsEditable(false)}
+                onClick={() => {
+                  setTempUser(user);
+                  setIsEditable(false);
+                }}
                 className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-sm font-semibold text-[var(--text)] transition hover:bg-[var(--surface-2)]"
               >
                 Cancel
@@ -89,11 +109,32 @@ const Settings = () => {
         <div className="space-y-6 flex rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm">
           <div className="flex items-center gap-4 ">
             <div className="h-30 w-30 overflow-hidden rounded-full border-2 border-[var(--primary)] bg-white">
-              <img src={user.photo} alt="Profile" className="h-full w-full object-cover" />
+              <img
+                src={profilePicPreview || user.photo}
+                alt="Profile"
+                className="h-full w-full object-cover "
+                // onChange={handleProfilePictureChange}
+              />
+              <label htmlFor="profilePic" className="">
+                <MdOutlineAddAPhoto className="text-2xl bg-base-100 absolute left-105 top-112 border rounded-2xl p-1" />
+              </label>
+
+              <input
+                type="file"
+                accept="image/*"
+                name="profilePic"
+                id="profilePic"
+                className="hidden"
+                onChange={handleProfilePictureChange}
+              />
             </div>
             <div>
-              <p className="text-lg font-semibold text-[var(--text)]">{user.fullName}</p>
-              <p className="text-sm text-[var(--text-light)]">Cravings customer</p>
+              <p className="text-lg font-semibold text-[var(--text)]">
+                {user.fullName}
+              </p>
+              <p className="text-sm text-[var(--text-light)]">
+                Cravings customer
+              </p>
             </div>
           </div>
         </div>
@@ -101,7 +142,9 @@ const Settings = () => {
         <div className="space-y-6 rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm">
           <div className="grid gap-4 rounded-3xl bg-[var(--surface-2)] p-6">
             <div className="flex gap-3 whitespace-nowrap items-center">
-              <label className="text-sm font-medium text-[var(--text-light)]">Full Name</label>
+              <label className="text-sm font-medium text-[var(--text-light)]">
+                Full Name
+              </label>
               <input
                 type="text"
                 name="fullName"
@@ -112,7 +155,9 @@ const Settings = () => {
               />
             </div>
             <div className="flex gap-10 whitespace-nowrap items-center">
-              <label className="text-sm font-medium text-[var(--text-light)]">Email</label>
+              <label className="text-sm font-medium text-[var(--text-light)]">
+                Email
+              </label>
               <input
                 type="email"
                 name="email"
@@ -122,9 +167,11 @@ const Settings = () => {
               />
             </div>
             <div className="flex gap-9 whitespace-nowrap items-center">
-              <label className="text-sm font-medium text-[var(--text-light)]">Phone</label>
+              <label className="text-sm font-medium text-[var(--text-light)]">
+                Phone
+              </label>
               <input
-                type="number"
+                type="tel"
                 name="phone"
                 value={tempUser.phone || ""}
                 onChange={handleChange}

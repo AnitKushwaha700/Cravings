@@ -1,4 +1,5 @@
 import User from "../models/user.model.js";
+import cloudinary from "../config/cloudinary.config.js";
 
 export const EditUserProfile = async (req, res, next) => {
   try {

@@ -4,7 +4,7 @@ import Sidebar from "../../components/userDashboard/Sidebar.jsx";
 import Overview from "../../components/userDashboard/Overview.jsx";
 import Orders from "../../components/userDashboard/Orders.jsx";
 import Wishlist from "../../components/userDashboard/Wishlist.jsx";
-import Settings from "../../components/userDashboard/Settings.jsx";
+import Settings from "../../components/userDashboard/CustomerSettings.jsx";
 
 const UserDashboard = () => {
   const [active, setActive] = useState("Overview");
