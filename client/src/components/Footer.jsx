@@ -4,18 +4,18 @@ import logo from "../assets/circleLogo-DpCri5UD.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-[var(--text)] px-6 py-16 text-[var(--text-white)] lg:px-8">
+    <footer className="bg-gray-700 px-6 py-16 text-[var(--text-white)] lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-10 flex flex-col gap-6 rounded-[24px] border border-white/10 bg-primary p-8 md:flex-row md:items-center md:justify-between">
+        <div className="mb-10 flex flex-col gap-6 rounded-[24px] border border-white/10 bg-[var(--surface)] p-8 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[var(--accent)]">
               Your favorite food delivery platform
             </p>
-            <h3 className="mt-2 text-2xl font-semibold text-content">
+            <h3 className="mt-2 text-2xl font-semibold text-(--secondary)">
               Connecting restaurants, riders, and food lovers every day.
             </h3>
           </div>
-          <img src={logo} alt="Cravings logo" className="h-20 w-auto" />
+          <img src={logo} alt="Cravings logo" className="h-20 w-auto rounded-full border border-black/20" />
         </div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">

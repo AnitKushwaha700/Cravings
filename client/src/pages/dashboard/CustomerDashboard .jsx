@@ -33,8 +33,8 @@ const CustomerDashboard = () => {
 
   return (
     <>
-      <div className="h-[92vh] flex gap-2 m-2">
-        <div className="w-3/17 bg-(--color-base-200) p-4 rounded-lg shadow-md h-full">
+      <div className="h-[87vh] flex gap-2 m-2">
+        <div className="w-3/17 bg-(--color-base-200) p-4 rounded-lg shadow-sm h-full">
           <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
         <div className="w-14/17 bg-(--color-base-100) p-4 rounded-lg shadow-md h-full">

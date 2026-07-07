@@ -4,12 +4,18 @@ import logo from "../assets/transparentLogoLight-De2Z7I01.png";
 import { useAuth } from "../context/AuthContext.jsx";
 import { AiOutlineLogout } from "react-icons/ai";
 import { FiMoon, FiSun } from "react-icons/fi";
+import { FaPowerOff } from "react-icons/fa";
 import api from "../config/api.config.js";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, isLogin, role, setUser, setIsLogin, setRole } = useAuth();
   const navigate = useNavigate();
+
+  const [theme, setTheme] = useState("theme-red");
+  useEffect(() => {
+    document.documentElement.className = theme;
+  }, [theme]);
 
   const handleNavigate = () => {
     //console.log("Handle Navigate", role);
@@ -52,25 +58,30 @@ const Navbar = () => {
 
         <div className="flex items-center gap-2 sm:gap-3">
           {isLogin ? (
-            <div className="flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-3 py-1.5">
-              <div className="h-8 w-8 overflow-hidden rounded-full">
-                <img
-                  src={user.photo}
-                  alt="User"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <Link
-                to="/customer-dashboard"
-                className="text-sm font-medium hover:text-[var(--accent)]"
-              >
-                {user.fullName}
-              </Link>
+            <div className="flex items-center gap-2">
               <button
+                className="flex gap-2 items-center text-(--color-primary-content) border border-transparent hover:border-(--color-primary-content)  px-3 py-1 rounded"
+                title="Go to Dashboard"
                 onClick={handleNavigate}
-                className="rounded-full p-2 text-lg transition hover:bg-white/10"
               >
-                <AiOutlineLogout />
+                <img
+                  src={user?.photo.url}
+                  alt={user?.fullName}
+                  className="w-12 h-12 rounded-full object-cover object-top"
+                />
+                <div className="flex flex-col items-start">
+                  <span className="text-base">{user?.fullName}</span>
+                  <span className="text-xs text-(--color-primary-content)/80">
+                    Customer
+                  </span>
+                </div>
+              </button>
+              <button
+                onClick={handleLogout}
+                className="text-(--color-primary-content) border border-transparent hover:border-(--color-primary-content) hover:bg-(--color-error) px-3 py-3 rounded"
+                title="Logout"
+              >
+                <FaPowerOff />
               </button>
             </div>
           ) : (
@@ -83,19 +94,19 @@ const Navbar = () => {
               </Link>
               <Link
                 to="/login"
-                className="rounded-full px-3 py-1.5 text-sm font-medium transition hover:bg-white/10"
+                className="rounded-md px-3 py-1.5 text-sm font-medium transition hover:border"
               >
                 Login
               </Link>
               <Link
                 to="/register"
-                className="rounded-full px-3 py-1.5 text-sm font-medium transition hover:bg-white/10"
+                className="rounded-md px-3 py-1.5 text-sm font-medium transition hover:border"
               >
                 Register
               </Link>
               <Link
                 to="/contactUs"
-                className="rounded-full px-3 py-1.5 text-sm font-medium transition hover:bg-white/10"
+                className="rounded-md px-3 py-1.5 text-sm font-medium transition hover:hover:border"
               >
                 Contact Us
               </Link>
@@ -103,10 +114,10 @@ const Navbar = () => {
                 onClick={() =>
                   setTheme(theme === "theme-red" ? "theme-dark" : "theme-red")
                 }
-                className="rounded-full border border-white/20 p-2 transition hover:bg-white/10"
+                className="rounded-full border border-white/20 p-2 transition hover:hover:border"
                 aria-label="Toggle theme"
               >
-                {/* {theme === "theme-red" ? <FiMoon /> : <FiSun />} */}
+                {theme === "theme-red" ? <FiMoon /> : <FiSun />}
               </button>
             </>
           )}
