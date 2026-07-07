@@ -3,7 +3,7 @@ import { EditUserProfile } from "../controller/user.controller.js";
 import { AuthProtect } from "../middleware/auth.middleware.js";
 import multer from "multer";
 
-const Upload = multer();
+const upload = multer();
 
 const router = express.Router();
 

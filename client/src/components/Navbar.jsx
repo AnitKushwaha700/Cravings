@@ -8,30 +8,37 @@ import api from "../config/api.config.js";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
-  const { user, setUser, isLogin, setIsLogin } = useAuth();
+  const { user, isLogin, role, setUser, setIsLogin, setRole } = useAuth();
   const navigate = useNavigate();
-  const [theme, setTheme] = useState(
-    () => localStorage.getItem("cravings-theme") || "theme-red",
-  );
 
-  useEffect(() => {
-    document.documentElement.className = theme;
-    localStorage.setItem("cravings-theme", theme);
-  }, [theme]);
+  const handleNavigate = () => {
+    //console.log("Handle Navigate", role);
+
+    if (role === "restaurant") {
+      navigate("/restaurant-dashboard");
+    } else if (role === "rider") {
+      navigate("/rider-dashboard");
+    } else if (role === "admin") {
+      navigate("/admin-dashboard");
+    } else {
+      navigate("/customer-dashboard");
+    }
+  };
 
   const handleLogout = async () => {
     try {
       const res = await api.get("/auth/logout");
-      sessionStorage.removeItem("userData");
-      sessionStorage.removeItem("UserData");
-      setIsLogin(false);
-      setUser(null);
-      navigate("/");
       toast.success(res.data.message);
+
+      sessionStorage.removeItem("cravingUser");
+      setUser(null);
+      setIsLogin(false);
+      setRole(null);
+      navigate("/");
     } catch (error) {
       toast.error(
-        error.response?.status + " | " + error.response?.data?.message ||
-          error.message,
+        error.response?.data?.message ||
+          "Unknown error occurred during registration. Please try again.",
       );
     }
   };
@@ -54,13 +61,13 @@ const Navbar = () => {
                 />
               </div>
               <Link
-                to="/user/dashboard"
+                to="/customer-dashboard"
                 className="text-sm font-medium hover:text-[var(--accent)]"
               >
                 {user.fullName}
               </Link>
               <button
-                onClick={handleLogout}
+                onClick={handleNavigate}
                 className="rounded-full p-2 text-lg transition hover:bg-white/10"
               >
                 <AiOutlineLogout />
@@ -99,7 +106,7 @@ const Navbar = () => {
                 className="rounded-full border border-white/20 p-2 transition hover:bg-white/10"
                 aria-label="Toggle theme"
               >
-                {theme === "theme-red" ? <FiMoon /> : <FiSun />}
+                {/* {theme === "theme-red" ? <FiMoon /> : <FiSun />} */}
               </button>
             </>
           )}

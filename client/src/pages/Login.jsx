@@ -42,7 +42,7 @@ const Login = () => {
       setUser(res.data.data);
       // setIsLogin(true);
 
-      navigate("/user/dashboard");
+      navigate("/customer-dashboard");
     } catch (error) {
       // console.error("Login failed:", error);
       toast.error(error.response?.data?.message || error.message);

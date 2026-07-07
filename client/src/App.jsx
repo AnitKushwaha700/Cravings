@@ -10,7 +10,7 @@ import HelpCenter from "./pages/HelpCenter";
 import OrderNow from "./pages/OrderNow";
 import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
-import UserDashboard from "./pages/dashboard/UserDashboard";
+import CustomerDashboard from "./pages/dashboard/CustomerDashboard ";
 
 const App = () => {
   return (
@@ -29,7 +29,7 @@ const App = () => {
           <Route path="/order-now" element={<OrderNow />} />
 
           {/* Dashboard Routes */}
-          <Route path="/user/dashboard" element={<UserDashboard />} />
+        <Route path="/customer-dashboard" element={<CustomerDashboard />} />
         </Routes>
       </BrowserRouter>
     </>
