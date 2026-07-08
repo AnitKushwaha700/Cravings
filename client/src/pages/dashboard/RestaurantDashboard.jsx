@@ -1,12 +1,12 @@
 import React from "react";
-import Sidebar from "../../components/customerDashboard/Sidebar.jsx";
-import CustomerOverview from "../../components/customerDashboard/CustomerOverview.jsx";
-import CustomerOrders from "../../components/customerDashboard/CustomerOrders.jsx";
-import CustomerSetting from "../../components/customerDashboard/CustomerSetting.jsx";
+import RestaurantSidebar from "../../components/restaurantDashboard/RestaurantSidebar.jsx";
+import RestaurantOverview from "../../components/restaurantDashboard/RestaurantOverview.jsx";
+import RestaurantOrders from "../../components/restaurantDashboard/RestaurantOrders.jsx";
+import RestaurantSetting from "../../components/restaurantDashboard/RestaurantSetting.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext.jsx";
 
-const CustomerDashboard = () => {
+const RestaurantDashboard = () => {
   const { isLogin } = useAuth();
   const navigate = useNavigate();
   const active = useLocation().state?.activeTab;
@@ -46,4 +46,4 @@ const CustomerDashboard = () => {
   );
 };
 
-export default CustomerDashboard;
+export default RestaurantDashboard;

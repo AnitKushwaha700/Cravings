@@ -1,12 +1,12 @@
 import React from "react";
-import Sidebar from "../../components/customerDashboard/Sidebar.jsx";
-import CustomerOverview from "../../components/customerDashboard/CustomerOverview.jsx";
-import CustomerOrders from "../../components/customerDashboard/CustomerOrders.jsx";
-import CustomerSetting from "../../components/customerDashboard/CustomerSetting.jsx";
+import AdminSidebar from "../../components/adminDashboard/AdminSidebar.jsx";
+import AdminOverview from "../../components/adminDashboard/AdminOverview.jsx";
+import AdminOrders from "../../components/adminDashboard/AdminOrders.jsx";
+import AdminSetting from "../../components/adminDashboard/AdminSetting.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext.jsx";
 
-const CustomerDashboard = () => {
+const AdminDashboard = () => {
   const { isLogin } = useAuth();
   const navigate = useNavigate();
   const active = useLocation().state?.activeTab;
@@ -46,4 +46,4 @@ const CustomerDashboard = () => {
   );
 };
 
-export default CustomerDashboard;
+export default AdminDashboard;

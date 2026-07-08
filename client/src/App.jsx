@@ -11,6 +11,9 @@ import OrderNow from "./pages/OrderNow";
 import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
 import CustomerDashboard from "./pages/dashboard/CustomerDashboard ";
+import AdminDashboard from "./pages/dashboard/AdminDashboard";
+import RestaurantDashboard from "./pages/dashboard/RestaurantDashboard";
+import RiderDashboard from "./pages/dashboard/RiderDashboard";
 
 const App = () => {
   return (
@@ -30,6 +33,9 @@ const App = () => {
 
           {/* Dashboard Routes */}
         <Route path="/customer-dashboard" element={<CustomerDashboard />} />
+        <Route path="/restaurant-dashboard" element={<RestaurantDashboard />} />
+        <Route path="/rider-dashboard" element={<RiderDashboard />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Routes>
       </BrowserRouter>
     </>

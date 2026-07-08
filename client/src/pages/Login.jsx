@@ -6,51 +6,79 @@ import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthContext.jsx";
 
 const Login = () => {
-  const { setUser, setIsLogin } = useAuth();
   const navigate = useNavigate();
+  const { setUser, setIsLogin, setRole } = useAuth();
+
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
+    rememberMe: false,
   });
 
-  const [validateError, setValidateError] = useState();
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
 
-    setLoginData((prevData) => ({ ...prevData, [name]: value }));
+  const validateForm = (data) => {
+    const newErrors = {};
+
+    if (!data.email.trim()) newErrors.email = "Email is required";
+    if (!data.password) newErrors.password = "Password is required";
+
+    return newErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here, e.g., send loginData to the server
-    // Validate loginData
+    const validationErrors = validateForm(formData);
 
-    console.log("Login data submitted:", loginData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
 
-    const payload = {
-      email: loginData.email.toLowerCase(),
-      password: loginData.password,
-    };
+    setLoading(true);
+    console.log("Login data submitted:", formData);
 
     try {
-      const res = await api.post("/auth/login", payload);
-      console.log("Login successful:", res.data);
+      const res = await api.post("/auth/login", {
+        email: formData.email.toLowerCase(),
+        password: formData.password,
+      });
       toast.success(res.data.message);
-      sessionStorage.setItem("userData", JSON.stringify(res.data.data));
+      sessionStorage.setItem("cravingUser", JSON.stringify(res.data.data));
       setUser(res.data.data);
-      // setIsLogin(true);
+      setIsLogin(true);
+      //console.log(res.data.data.userType);
+      setRole(res.data.data.userType);
+      
+      res.data.data.userType === "restaurant" &&
+        navigate("/restaurant-dashboard");
 
-      navigate("/customer-dashboard");
+      res.data.data.userType === "rider" && navigate("/rider-dashboard");
+
+      res.data.data.userType === "admin" && navigate("/admin-dashboard");
+
+      res.data.data.userType === "customer" && navigate("/customer-dashboard");
     } catch (error) {
-      // console.error("Login failed:", error);
-      toast.error(error.response?.data?.message || error.message);
+      toast.error(
+        error.response?.data?.message ||
+          "Unknown error occurred during registration. Please try again.",
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
-  const inputClass =
-    "border p-2 rounded focus:outline-none focus:ring-2";
+  const inputClass = "border p-2 rounded focus:outline-none focus:ring-2";
 
   return (
     <>
