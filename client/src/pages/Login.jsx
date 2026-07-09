@@ -21,7 +21,7 @@ const Login = () => {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
+    setLoginData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
@@ -38,20 +38,19 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationErrors = validateForm(formData);
-
+    const validationErrors = validateForm(loginData);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
 
     setLoading(true);
-    console.log("Login data submitted:", formData);
+    console.log("Login data submitted:", loginData);
 
     try {
       const res = await api.post("/auth/login", {
-        email: formData.email.toLowerCase(),
-        password: formData.password,
+        email: loginData.email.toLowerCase(),
+        password: loginData.password,
       });
       toast.success(res.data.message);
       sessionStorage.setItem("cravingUser", JSON.stringify(res.data.data));
@@ -59,7 +58,7 @@ const Login = () => {
       setIsLogin(true);
       //console.log(res.data.data.userType);
       setRole(res.data.data.userType);
-      
+
       res.data.data.userType === "restaurant" &&
         navigate("/restaurant-dashboard");
 
@@ -103,7 +102,7 @@ const Login = () => {
                 id="email"
                 name="email"
                 value={loginData.email}
-                onChange={handleChange}
+                onChange={handleInputChange}
                 className={inputClass}
               />
             </div>
@@ -116,14 +115,14 @@ const Login = () => {
                 id="password"
                 name="password"
                 value={loginData.password}
-                onChange={handleChange}
+                onChange={handleInputChange}
                 className={inputClass}
               />
             </div>
 
-            {validateError && (
-              <p className="text-red-500 text-sm col-span-2">{validateError}</p>
-            )}
+            {/* {handleInputChange && (
+              <p className="text-red-500 text-sm col-span-2">{handleInputChange}</p>
+            )} */}
 
             <button
               type="submit"
