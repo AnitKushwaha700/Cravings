@@ -4,7 +4,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { MdFavoriteBorder } from "react-icons/md";
 import { IoMdSettings } from "react-icons/io";
 
-const Sidebar = ({ activeTab, setActiveTab }) => {
+const CustomerSidebar = ({ activeTab, setActiveTab }) => {
   const mainTabs = [
     { name: "Overview", value: "overview", icon: <MdDashboard /> },
     { name: "Orders", value: "orders", icon: <FaShoppingCart /> },
@@ -15,10 +15,10 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
   const renderTab = (tab) => (
     <li
       key={tab.value}
-      className={`cursor-pointer p-3 rounded text-(--color-neutral) flex items-center gap-3 ${
+      className={`cursor-pointer p-2 rounded text-(--color-neutral) flex items-center gap-3 ${
         activeTab === tab.value
-          ? "bg-(--primary) text-(--color-primary-content) font-medium"
-          : ""
+          ? "bg-(--color-primary) text-(--color-primary-content) font-semibold"
+          : "hover:bg-(--color-secondary) hover:text-(--color-secondary-content) transition-colors duration-200"
       }`}
       onClick={() => setActiveTab(tab.value)}
     >
@@ -40,4 +40,4 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
   );
 };
 
-export default Sidebar;
+export default CustomerSidebar;

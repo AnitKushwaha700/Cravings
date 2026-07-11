@@ -3,64 +3,84 @@ import bcrypt from "bcrypt";
 
 const UserData = [
   {
-    fullname: "Manager1",
+    fullName: "Manager1",
     email: "Manager1@gmail.com",
-    password: bcrypt.hash("StrongPassword@123", 10),
+    password: await bcrypt.hash("Manager@123", 10),
     dob: "2000-01-01",
-    gender: "Male",
+    gender: "other",
     userType: "restaurant",
-    phone: "8989898989",
-    photo: {
-      url: "https://placehold.co/600x400?text=Restaurant",
-      publicId: null,
-    },
+    phone: "9876543210",
+    photo: { url: "https://placehold.co/600x400?text=M", publicId: null },
   },
   {
-    fullname: "Customer1",
+    fullName: "Customer1",
     email: "Customer1@gmail.com",
-    password: bcrypt.hash("StrongPassword@123", 10),
+    password: await bcrypt.hash("Customer@123", 10),
     dob: "2000-01-01",
-    gender: "Male",
+    gender: "other",
     userType: "customer",
-    phone: "8989898989",
-    photo: {
-      url: "https://placehold.co/600x400?text=customer",
-      publicId: null,
-    },
+    phone: "9876543210",
+    photo: { url: "https://placehold.co/600x400?text=C", publicId: null },
   },
   {
-    fullname: "Rider1",
+    fullName: "Rider1",
     email: "Rider1@gmail.com",
-    password: bcrypt.hash("StrongPassword@123", 10),
+    password: await bcrypt.hash("Rider@123", 10),
     dob: "2000-01-01",
-    gender: "Male",
+    gender: "other",
     userType: "rider",
-    phone: "8989898989",
-    photo: {
-      url: "https://placehold.co/600x400?text=rider",
-      publicId: null,
-    },
+    phone: "9876543210",
+    photo: { url: "https://placehold.co/600x400?text=R", publicId: null },
   },
 ];
 
 const userSeed = async () => {
   try {
+    //Seeding Restaurant
     const existingRestaurant = await User.findOne({ email: UserData[0].email });
 
     if (existingRestaurant) {
-      console.log("Existing Restaurant Found");
-      console.log("Deleting Existing Restaurant");
-
+      console.log("Existing Resturant Found");
+      console.log("Deleting Existing Resturant");
       await existingRestaurant.deleteOne();
     }
 
     console.log("Creating New Restaurant");
 
-    const newUser = await User.create(UserData[0]);
-    console.log("Restaurant Created Successfully");
-  } catch (error) {
-    console.log("Restaurant not Created");
+    const newRestaurant = await User.create(UserData[0]);
+    console.log("Restaurant Created Sucessfully");
 
+    //Seeding Customer
+
+    const existingCustomer = await User.findOne({ email: UserData[1].email });
+
+    if (existingCustomer) {
+      console.log("Existing Customer Found");
+      console.log("Deleting Existing Customer");
+      await existingCustomer.deleteOne();
+    }
+
+    console.log("Creating New Customer");
+
+    const newCustomer = await User.create(UserData[1]);
+    console.log("Customer Created Sucessfully");
+
+    // Seeding Rider
+
+    const existingRider = await User.findOne({ email: UserData[2].email });
+
+    if (existingRider) {
+      console.log("Existing Rider Found");
+      console.log("Deleting Existing Rider");
+      await existingRider.deleteOne();
+    }
+
+    console.log("Creating New Rider");
+
+    const newRider = await User.create(UserData[2]);
+    console.log("Rider Created Sucessfully");
+  } catch (error) {
+    console.log("User Not Created");
     throw error;
   }
 };
