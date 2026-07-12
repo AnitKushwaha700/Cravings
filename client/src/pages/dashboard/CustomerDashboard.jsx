@@ -1,18 +1,18 @@
 import React from "react";
-import CustomerSidebar from "../../components/customerDashboard/CustomerSidebar.jsx";
-import CustomerOverview from "../../components/customerDashboard/CustomerOverview.jsx";
-import CustomerOrders from "../../components/customerDashboard/CustomerOrders.jsx";
-import CustomerSetting from "../../components/customerDashboard/CustomerSetting.jsx";
+import CustomerSidebar from "../../components/customerDashboard/CustomerSidebar";
+import CustomerOverview from "../../components/customerDashboard/CustomerOverview";
+import CustomerOrders from "../../components/customerDashboard/CustomerOrders";
+import CustomerSetting from "../../components/customerDashboard/CustomerSetting";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext.jsx";
+import { useAuth } from "../../context/AuthContext";
 
 const CustomerDashboard = () => {
-  const { isLogin } = useAuth();
+  const { isLogin, role } = useAuth();
   const navigate = useNavigate();
   const active = useLocation().state?.activeTab;
   const [activeTab, setActiveTab] = React.useState(active || "overview");
 
-  if (!isLogin || role !== "admin") {
+  if (!isLogin || role !== "customer") {
     return (
       <div className="h-[92vh] bg-[url('/foodTable.webp')]  bg-cover bg-center">
         <div className="h-full backdrop-blur-lg flex flex-col items-center justify-center ">
@@ -32,8 +32,8 @@ const CustomerDashboard = () => {
 
   return (
     <>
-      <div className="h-[87vh] flex gap-2 m-2">
-        <div className="w-3/17 bg-(--color-base-200) p-4 rounded-lg shadow-sm h-full">
+      <div className="h-[91vh] flex gap-2 p-2">
+        <div className="w-3/17 bg-(--color-base-200) p-4 rounded-lg shadow-md h-full">
           <CustomerSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
         <div className="w-14/17 bg-(--color-base-100) p-4 rounded-lg shadow-md h-full">

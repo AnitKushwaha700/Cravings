@@ -44,7 +44,7 @@ const Navbar = () => {
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
-          "Unknown error occurred during registration. Please try again.",
+          "Unknown error occurred. Please try again.",
       );
     }
   };

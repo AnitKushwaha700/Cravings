@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { MdEdit } from "react-icons/md";
-import { useAuth } from "../../context/AuthContext";
-import api from "../../config/ApiConfig";
+import { useAuth } from "../../context/AuthContext.jsx";
+import api from "../../config/api.config.js";
 import toast from "react-hot-toast";
 import { MdOutlineAddAPhoto } from "react-icons/md";
 import PasswordChangeModal from "../commonModals/PasswordChangeModal";
+
 
 const RiderSetting = () => {
   const { user, setUser } = useAuth();

@@ -12,12 +12,10 @@ const Login = () => {
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
-    rememberMe: false,
   });
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -44,6 +42,7 @@ const Login = () => {
       return;
     }
 
+    setErrors({});
     setLoading(true);
     console.log("Login data submitted:", loginData);
 
@@ -56,21 +55,21 @@ const Login = () => {
       sessionStorage.setItem("cravingUser", JSON.stringify(res.data.data));
       setUser(res.data.data);
       setIsLogin(true);
-      //console.log(res.data.data.userType);
       setRole(res.data.data.userType);
 
-      res.data.data.userType === "restaurant" &&
+      if (res.data.data.userType === "restaurant") {
         navigate("/restaurant-dashboard");
-
-      res.data.data.userType === "rider" && navigate("/rider-dashboard");
-
-      res.data.data.userType === "admin" && navigate("/admin-dashboard");
-
-      res.data.data.userType === "customer" && navigate("/customer-dashboard");
+      } else if (res.data.data.userType === "rider") {
+        navigate("/rider-dashboard");
+      } else if (res.data.data.userType === "admin") {
+        navigate("/admin-dashboard");
+      } else {
+        navigate("/customer-dashboard");
+      }
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
-          "Unknown error occurred during registration. Please try again.",
+          "Unknown error occurred during login. Please try again.",
       );
     } finally {
       setLoading(false);
@@ -87,7 +86,7 @@ const Login = () => {
       >
         {/* Card */}
         <div className="w-full max-w-md bg-(--background) rounded-xl shadow-2xl p-10">
-          <div className="text-3xl font-bold mb-2 text-center text-[var(--primary)]">
+          <div className="text-3xl font-bold mb-2 text-center text-(--primary)">
             Welcome Back
           </div>
           <div className="text-md text-gray-500 mb-4 text-center ">
@@ -118,18 +117,22 @@ const Login = () => {
                 onChange={handleInputChange}
                 className={inputClass}
               />
+              {errors.password && (
+                <p className="text-red-500 text-sm">{errors.password}</p>
+              )}
             </div>
 
-            {/* {handleInputChange && (
-              <p className="text-red-500 text-sm col-span-2">{handleInputChange}</p>
-            )} */}
+            {errors.email && (
+              <p className="text-red-500 text-sm col-span-2">{errors.email}</p>
+            )}
 
             <button
               type="submit"
-              className="col-span-2 mt-2 rounded py-2 px-4 text-white"
+              disabled={loading}
+              className="col-span-2 mt-2 rounded py-2 px-4 text-white disabled:cursor-not-allowed disabled:opacity-70"
               style={{ backgroundColor: "var(--primary)" }}
             >
-              Login
+              {loading ? "Logging in..." : "Login"}
             </button>
           </form>
 
@@ -147,7 +150,7 @@ const Login = () => {
             <p className="text-sm">
               Having Trouble?{" "}
               <button
-                onClick={() => navigate("/contact")}
+                onClick={() => navigate("/contactUs")}
                 className="font-semibold hover:underline"
                 style={{ color: "var(--primary)" }}
               >

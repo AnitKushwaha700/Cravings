@@ -10,7 +10,7 @@ import HelpCenter from "./pages/HelpCenter";
 import OrderNow from "./pages/OrderNow";
 import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
-import CustomerDashboard from "./pages/dashboard/CustomerDashboard ";
+import CustomerDashboard from "./pages/dashboard/CustomerDashboard";
 import AdminDashboard from "./pages/dashboard/AdminDashboard";
 import RestaurantDashboard from "./pages/dashboard/RestaurantDashboard";
 import RiderDashboard from "./pages/dashboard/RiderDashboard";
@@ -24,6 +24,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/register/:userType" element={<Register />} />
           <Route path="/contactUs" element={<Contact />} />
           <Route path="/about" element={<About />} />
