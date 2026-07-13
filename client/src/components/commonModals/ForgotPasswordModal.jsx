@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { LuLoaderCircle } from "react-icons/lu";
-import api from "../../config/api.config.js";
+import api from "../../config/ApiConfig";
 import toast from "react-hot-toast";
 
 const ForgotPasswordModal = ({ open, onClose }) => {
@@ -54,7 +54,7 @@ const ForgotPasswordModal = ({ open, onClose }) => {
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
-          "Unknown error occurred. Please try again.",
+          "Unknown error occurred during registration. Please try again.",
       );
     } finally {
       setIsLoading(false);

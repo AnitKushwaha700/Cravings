@@ -11,6 +11,9 @@ export const RegisterUser = async (req, res, next) => {
     const { fullName, email, password, phone, gender, dob, userType } =
       req.body;
 
+      console.log(1);
+      
+
     if (
       !fullName ||
       !email ||
@@ -25,12 +28,18 @@ export const RegisterUser = async (req, res, next) => {
       return next(error);
     }
 
+      console.log(2);
+
+
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       const error = new Error("Email already registred");
       error.statusCode = 409;
       return next(error);
     }
+
+      console.log(4);
+
 
     const photoURL = `https://placehold.co/600x400?text=${fullName.charAt(0).toUpperCase()}`;
 

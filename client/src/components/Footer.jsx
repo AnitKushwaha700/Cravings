@@ -1,63 +1,150 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import logo from "../assets/circleLogo-DpCri5UD.png";
+import { Link, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import logoCircle from "../assets/circleLogo.png";
 
 const Footer = () => {
+  const location = useLocation().pathname;
+  const currentYear = new Date().getFullYear();
+  const navigate = useNavigate();
+
+  if (location.toLowerCase().includes("dashboard")) return null;
+
   return (
-    <footer className="bg-gray-700 px-6 py-16 text-[var(--text-white)] lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-10 flex flex-col gap-6 rounded-[24px] border border-white/10 bg-[var(--surface)] p-8 md:flex-row md:items-center md:justify-between">
+    <footer className="bg-(--color-neutral) text-(--color-neutral-content) py-8">
+      <div className="max-w-7xl mx-auto px-4">
+        {/* Footer Content Grid */}
+
+        <p className="text-sm text-(--color-neutral-content) text-center mb-8">
+          --- Your favorite food delivery platform connecting customers with
+          restaurants and riders. ---
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
+          {/* About Section */}
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[var(--accent)]">
-              Your favorite food delivery platform
-            </p>
-            <h3 className="mt-2 text-2xl font-semibold text-(--secondary)">
-              Connecting restaurants, riders, and food lovers every day.
-            </h3>
+            <img
+              src={logoCircle}
+              alt="Cravings Logo"
+              className="mb-4 w-32 h-32"
+            />
           </div>
-          <img src={logo} alt="Cravings logo" className="h-20 w-auto rounded-full border border-black/20" />
+
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul className="space-y-2">
+              <li
+                className="text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                onClick={() => navigate("/")}
+              >
+                Home
+              </li>
+              <li
+                className="text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                onClick={() => navigate("/about")}
+              >
+                About
+              </li>
+              <li
+                className="text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                onClick={() => navigate("/order-now")}
+              >
+                Order Now
+              </li>
+            </ul>
+          </div>
+
+          {/* For Restaurants */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">For Restaurants</h4>
+            <ul className="space-y-2">
+              <li
+                className="text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                onClick={() => navigate("/register/restaurant")}
+              >
+                Partner With Us
+              </li>
+              <li
+                className="text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                onClick={() => navigate("/restaurant-dashboard")}
+              >
+                Restaurant Dashboard
+              </li>
+            </ul>
+          </div>
+
+          {/* For Riders */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">For Riders</h4>
+            <ul className="space-y-2">
+              <li
+                className="text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                onClick={() => navigate("/register/rider")}
+              >
+                Become a Rider
+              </li>
+              <li
+                className="text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                onClick={() => navigate("/rider-dashboard")}
+              >
+                Rider Dashboard
+              </li>
+            </ul>
+          </div>
+          {/* Feedback & Support */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Feedback & Support</h4>
+            <ul className="space-y-2">
+              <li
+                className="text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                onClick={() => navigate("/feedback")}
+              >
+                Submit Feedback
+              </li>
+              <li
+                className="text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                onClick={() => navigate("/help-center")}
+              >
+                Help Center
+              </li>
+              <li
+                className="text-sm hover:text-(--color-primary) transition-colors duration-200 cursor-pointer"
+                onClick={() => navigate("/contact")}
+              >
+                Contact Us
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <h4 className="mb-4 font-semibold">Quick Links</h4>
-            <div className="flex flex-col gap-2 text-sm text-white/80">
-              <Link to="/" className="transition hover:text-[var(--accent)]">Home</Link>
-              <Link to="/about" className="transition hover:text-[var(--accent)]">About</Link>
-              <Link to="/order-now" className="transition hover:text-[var(--accent)]">Order Now</Link>
-            </div>
-          </div>
-          <div>
-            <h4 className="mb-4 font-semibold">For Restaurants</h4>
-            <div className="flex flex-col gap-2 text-sm text-white/80">
-              <Link to="/register" className="transition hover:text-[var(--accent)]">Partner With Us</Link>
-              <Link to="/login" className="transition hover:text-[var(--accent)]">Restaurant Dashboard</Link>
-            </div>
-          </div>
-          <div>
-            <h4 className="mb-4 font-semibold">Support</h4>
-            <div className="flex flex-col gap-2 text-sm text-white/80">
-              <Link to="/feedback" className="transition hover:text-[var(--accent)]">Feedback</Link>
-              <Link to="/help-center" className="transition hover:text-[var(--accent)]">Help Center</Link>
-              <Link to="/contactUs" className="transition hover:text-[var(--accent)]">Contact Us</Link>
-            </div>
-          </div>
-          <div>
-            <h4 className="mb-4 font-semibold">Company</h4>
-            <div className="flex flex-col gap-2 text-sm text-white/80">
-              <Link to="/about" className="transition hover:text-[var(--accent)]">Our Story</Link>
-              <Link to="/privacy-policy" className="transition hover:text-[var(--accent)]">Privacy Policy</Link>
-              <Link to="/terms-of-service" className="transition hover:text-[var(--accent)]">Terms of Service</Link>
-            </div>
-          </div>
-        </div>
+        {/* Divider */}
+        <div className="border-t border(--color-neutral) my-8"></div>
 
-        <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-white/70 md:flex-row md:items-center md:justify-between">
-          <p>© 2026 Cravings. All rights reserved.</p>
-          <div className="flex flex-wrap gap-4">
-            <Link to="/privacy-policy" className="transition hover:text-[var(--accent)]">Privacy Policy</Link>
-            <Link to="/terms-of-service" className="transition hover:text-[var(--accent)]">Terms of Service</Link>
-            <Link to="/sitemap" className="transition hover:text-[var(--accent)]">Sitemap</Link>
+        {/* Bottom Section */}
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          {/* Copyright */}
+          <p className="text-sm text-(--color-neutral-content) mb-4 md:mb-0">
+            &copy; {currentYear} Cravings. All rights reserved.
+          </p>
+
+          {/* Legal Links */}
+          <div className="flex gap-6">
+            <Link to="/privacy-policy">
+              <span className="text-sm text-(--color-neutral-content) hover:text-(--color-primary) transition-colors duration-200">
+                Privacy Policy
+              </span>
+            </Link>
+            <Link to="/terms-of-service">
+              <span className="text-sm text-(--color-neutral-content) hover:text-(--color-primary) transition-colors duration-200">
+                Terms of Service
+              </span>
+            </Link>
+            <Link to="/site-map">
+              <span className="text-sm text-(--color-neutral-content) hover:text-(--color-primary) transition-colors duration-200">
+                Site Map
+              </span>
+            </Link>
           </div>
         </div>
       </div>
