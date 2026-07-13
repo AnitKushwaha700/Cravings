@@ -1,5 +1,3 @@
-// https://res.cloudinary.com/jh3ku9oj/image/upload/v1783776924/circleLogo-DpCri5UD_goflv4.png
-
 import sendEmail from "../config/email.config.js";
 
 export const sendOTPEmail = async (email, newOTP) => {
@@ -28,7 +26,7 @@ export const sendOTPEmail = async (email, newOTP) => {
                         <td align="center" style="background:#ff6b35;padding:35px 25px;">
 
                             <img
-                                src="https://res.cloudinary.com/jh3ku9oj/image/upload/v1783776924/circleLogo-DpCri5UD_goflv4.png"
+                                src="https://res.cloudinary.com/dpl3xwf1z/image/upload/v1783776802/circleLogo_z7icie.png"
                                 alt="Cravings Logo"
                                 width="90"
                                 style="display:block;border:0;outline:none;text-decoration:none;background:#ffffff;border-radius:50%;padding:8px;margin:0 auto 20px auto;"

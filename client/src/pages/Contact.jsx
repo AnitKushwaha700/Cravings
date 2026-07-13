@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import foodTable from "../assets/foodTable.webp";
-import api from "../config/api.config.js";
+import api from "../config/ApiConfig.js";
 
 
 const ContactUs = () => {

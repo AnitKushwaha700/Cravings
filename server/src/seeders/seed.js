@@ -2,12 +2,12 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import connectDB from "../config/dbConnection.config.js";
-import adminSeed from "./adminSeed.js";
-import userSeed from "./userSeed.js";
+import adminSeed from "./admin.seed.js";
+import userSeed from "./user.seed.js";
 
 const Seed = async () => {
   try {
-    await connectDB();
+    connectDB();
 
     await adminSeed();
     await userSeed();
