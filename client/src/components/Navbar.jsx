@@ -38,9 +38,10 @@ const Navbar = () => {
       toast.error(
         error.response?.data?.message ||
           "Unknown error occurred during registration. Please try again.",
-      );
-    }
-  };
+          
+        );
+      }
+    };
 
   return (
     <>

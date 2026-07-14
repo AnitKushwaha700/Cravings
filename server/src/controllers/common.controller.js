@@ -16,6 +16,7 @@ export const EditUserProfile = async (req, res, next) => {
     }
 
     const existingUser = await User.findOne({ email });
+    
     if (!existingUser) {
       const error = new Error("Email not registred");
       error.statusCode = 404;
