@@ -37,7 +37,9 @@ const AdminSetting = () => {
       payload.append("email", formData.email.toLowerCase());
       payload.append("phone", formData.phone);
 
-      payload.append("displayPic", profilePic);
+      if (profilePic) {
+        payload.append("displayPic", profilePic);
+      }
 
       const response = await api.put(`/common/edit-profile`, payload);
 

@@ -15,8 +15,8 @@ export const EditUserProfile = async (req, res, next) => {
       return next(error);
     }
 
-    const existingUser = await User.findOne({ email });
-    
+    const existingUser = await User.findById(req.user._id);
+
     if (!existingUser) {
       const error = new Error("Email not registred");
       error.statusCode = 404;
@@ -53,7 +53,7 @@ export const EditUserProfile = async (req, res, next) => {
       .json({ message: "User Updated Sucessfully", data: existingUser });
   } catch (error) {
     console.log(error.message);
-    next();
+    next(error);
   }
 };
 
