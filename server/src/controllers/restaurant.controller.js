@@ -124,3 +124,11 @@ export const RestaurantUpdateProfile = async (req, res, next) => {
     next();
   }
 };
+
+
+// {
+//   "message" : "Restaurant Fetched Successfully",
+//   "data" : {
+
+//   }
+// }
