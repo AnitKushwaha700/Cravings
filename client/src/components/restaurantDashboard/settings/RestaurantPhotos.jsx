@@ -3,7 +3,7 @@ import { MdOutlineAddAPhoto } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 
 const RestaurantPhotos = () => {
-  const MAX_FILE_SIZE = 1024 * 1024; // 1MB
+  const MAX_FILE_SIZE = 1024 * 1024 * 5; // 1MB
   const MAX_GALLERY_IMAGES = 8;
 
   const [coverImage, setCoverImage] = useState(null);
