@@ -16,7 +16,6 @@ const RestaurantInformation = () => {
     useState(false);
 
   // Profile handlers
-
   const [editingProfile, setEditingProfile] = useState(false);
   const [profilePic, setProfilePic] = useState(null);
   const [profilePicPreview, setProfilePicPreview] = useState(null);
@@ -87,7 +86,14 @@ const RestaurantInformation = () => {
     contactPhone: restaurantData?.contactDetails?.phone || "",
     openingTime: restaurantData?.servingHours?.openingTime || "",
     closingTime: restaurantData?.servingHours?.closingTime || "",
+    legalName: restaurantData?.legalName || "",
+    companyType: restaurantData?.companyType || "",
   });
+  //   const [restaurantFormData, setRestaurantFormData] = useState({
+  //   restaurantName: restaurantData?.restaurantName || "",
+  //   legalName: restaurantData?.legalName || "",
+  //   companyType: restaurantData?.companyType || "",
+  // });
 
   const handleRestaurantChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -132,7 +138,7 @@ const RestaurantInformation = () => {
     try {
       setIsLoadingRestaurant(true);
 
-      const res = await api.get(
+      const res = await e.get(
         `/restaurant/get-resturant-data?id=${user._id}`,
       );
       setRestaurantData(res.data.data);
@@ -210,14 +216,14 @@ const RestaurantInformation = () => {
               ) : (
                 <div className="flex gap-2 justify-end">
                   <button
-                    onClick={handleSaveProfile}
+                    onClick={handleSaveRestaurant}
                     className="flex items-center gap-2 bg-(--color-primary) text-(--color-primary-content) px-2 py-0.5 rounded text-xs"
                     disabled={isLoading}
                   >
                     {isLoading ? "Saving..." : "Save Changes"}
                   </button>
                   <button
-                    onClick={handleCancelProfile}
+                    onClick={handleCancelRestaurant}
                     className="flex items-center gap-2 bg-(--color-secondary) text-(--color-secondary-content) px-2 py-0.5 rounded text-xs"
                     disabled={isLoading}
                   >
@@ -479,7 +485,7 @@ const RestaurantInformation = () => {
               <input
                 type="tel"
                 name="legalName"
-                value={restaurantFormData?.contactPhone || ""}
+                value={restaurantFormData?.legalName || ""}
                 onChange={handleRestaurantChange}
                 className={`w-full px-1.5 py-1 border border-(--color-secondary) ${editingRestaurant ? "bg-white" : "bg-(--color-base-100)"} rounded`}
                 disabled={!editingRestaurant}
@@ -490,7 +496,7 @@ const RestaurantInformation = () => {
               <input
                 type="tel"
                 name="companyType"
-                value={restaurantFormData?.contactPhone || ""}
+                value={restaurantFormData?.companyType || ""}
                 onChange={handleRestaurantChange}
                 className={`w-full px-1.5 py-1 border border-(--color-secondary) ${editingRestaurant ? "bg-white" : "bg-(--color-base-100)"} rounded`}
                 disabled={!editingRestaurant}
