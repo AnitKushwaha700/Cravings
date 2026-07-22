@@ -9,7 +9,7 @@ const RestaurantSetting = () => {
     { id: "coreDetails", label: "Core Details" },
     { id: "photos", label: "Photos" },
   ];
-  const [activeTab, setActiveTab] = useState("coreDetails");
+  const [activeTab, setActiveTab] = useState("information");
 
   const [isRestaurantOpen, setIsRestaurantOpen] = useState(true);
   return (

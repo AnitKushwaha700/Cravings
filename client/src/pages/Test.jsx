@@ -2,8 +2,6 @@ import React from "react";
 
 const Test = () => {
 
-
-    
   if ("geolocation" in navigator) {
     console.log("Location Avaliable");
   } else {
