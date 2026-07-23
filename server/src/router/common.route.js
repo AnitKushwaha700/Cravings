@@ -3,7 +3,7 @@ import multer from "multer";
 import {
   EditUserProfile,
   UpdateUserPassword,
-} from "../controllers/common.controller.js";
+} from "../controller/common.controller.js";
 import { AuthProtect } from "../middleware/auth.middleware.js";
 
 const Upload = multer();
