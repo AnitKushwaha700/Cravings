@@ -283,7 +283,7 @@ export const RestaurantAddMenuItem = async (req, res, next) => {
       status,
       isTopRated,
       isRecommended,
-      isNewItem,
+      isNew,
       isDeleted,
     } = req.body;
     const itemImageFromFE = req.file;
@@ -297,7 +297,7 @@ export const RestaurantAddMenuItem = async (req, res, next) => {
       status,
       isTopRated,
       isRecommended,
-      isNewItem,
+      isNew,
       isDeleted,
       itemImageFromFE,
     });
@@ -355,7 +355,7 @@ export const RestaurantAddMenuItem = async (req, res, next) => {
         status,
         isTopRated,
         isRecommended,
-        isNewItem,
+        isNew,
         isDeleted,
         image: itemImage,
       });
@@ -376,7 +376,7 @@ export const RestaurantAddMenuItem = async (req, res, next) => {
         status,
         isTopRated,
         isRecommended,
-        isNewItem,
+        isNew,
         isDeleted,
         image: itemImage,
       };
@@ -392,6 +392,41 @@ export const RestaurantAddMenuItem = async (req, res, next) => {
         data: newMenuItem,
       });
     }
+  } catch (error) {
+    console.log(error.message);
+    next();
+  }
+};
+
+export const RestaurantMenuItems = async (req, res, next) => {
+  try {
+    const currentUser = req.user;
+
+    const existingRestaurant = await Restaurant.findOne({
+      managerId: currentUser._id,
+    });
+    if (!existingRestaurant) {
+      const error = new Error("Restaurant Not Found");
+      error.statusCode = 404;
+      return next(error);
+    }
+
+    const existingMenuItem = await Menu.findOne({
+      restaurantId: existingRestaurant._id,
+    });
+
+    if (!existingMenuItem) {
+      const error = new Error("Menu Items Not Found");
+      error.statusCode = 404;
+      return next(error);
+    }
+
+    // console.log("Existing Menu Items:", existingMenuItem.menuItems);
+
+    return res.status(200).json({
+      message: "Menu items fetched successfully",
+      data: existingMenuItem.menuItems,
+    });
   } catch (error) {
     console.log(error.message);
     next();
