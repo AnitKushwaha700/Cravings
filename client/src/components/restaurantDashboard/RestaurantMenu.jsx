@@ -21,7 +21,7 @@ const dummyMenu = [
     status: "available",
     isTopRated: true,
     isRecommended: true,
-    isNew: false,
+    isNewItemItem: false,
     isDeleted: false,
   },
   {
@@ -38,7 +38,7 @@ const dummyMenu = [
     status: "available",
     isTopRated: false,
     isRecommended: true,
-    isNew: true,
+    isNewItemItem: true,
     isDeleted: false,
   },
   {
@@ -55,7 +55,7 @@ const dummyMenu = [
     status: "unavailable",
     isTopRated: true,
     isRecommended: false,
-    isNew: false,
+    isNewItemItem: false,
     isDeleted: false,
   },
   {
@@ -71,7 +71,7 @@ const dummyMenu = [
     status: "available",
     isTopRated: false,
     isRecommended: true,
-    isNew: true,
+    isNewItemItem: true,
     isDeleted: false,
   },
   {
@@ -87,7 +87,7 @@ const dummyMenu = [
     status: "discontinued",
     isTopRated: true,
     isRecommended: true,
-    isNew: false,
+    isNewItemItem: false,
     isDeleted: false,
   },
   {
@@ -104,7 +104,7 @@ const dummyMenu = [
     status: "available",
     isTopRated: true,
     isRecommended: true,
-    isNew: false,
+    isNewItemItem: false,
     isDeleted: false,
   },
   {
@@ -121,7 +121,7 @@ const dummyMenu = [
     status: "available",
     isTopRated: true,
     isRecommended: false,
-    isNew: true,
+    isNewItemItem: true,
     isDeleted: false,
   },
   {
@@ -137,7 +137,7 @@ const dummyMenu = [
     status: "unavailable",
     isTopRated: true,
     isRecommended: true,
-    isNew: false,
+    isNewItemItem: false,
     isDeleted: false,
   },
   {
@@ -154,7 +154,7 @@ const dummyMenu = [
     status: "available",
     isTopRated: true,
     isRecommended: true,
-    isNew: true,
+    isNewItemItem: true,
     isDeleted: false,
   },
   {
@@ -171,7 +171,7 @@ const dummyMenu = [
     status: "available",
     isTopRated: false,
     isRecommended: true,
-    isNew: false,
+    isNewItemItem: false,
     isDeleted: false,
   },
   {
@@ -188,7 +188,7 @@ const dummyMenu = [
     status: "discontinued",
     isTopRated: false,
     isRecommended: false,
-    isNew: true,
+    isNewItemItem: true,
     isDeleted: false,
   },
   {
@@ -205,7 +205,7 @@ const dummyMenu = [
     status: "available",
     isTopRated: true,
     isRecommended: true,
-    isNew: false,
+    isNewItemItem: false,
     isDeleted: false,
   },
   {
@@ -221,7 +221,7 @@ const dummyMenu = [
     status: "unavailable",
     isTopRated: true,
     isRecommended: true,
-    isNew: false,
+    isNewItemItem: false,
     isDeleted: false,
   },
 ];
@@ -364,7 +364,7 @@ const RestaurantMenu = () => {
                   </button>
                   <button
                     className={`px-1 py-0.5 rounded flex items-center justify-center text-xs ${
-                      item.isNew
+                      item.isNewItemItem
                         ? "text-(--color-primary) border border-(--color-primary)"
                         : "text-(--color-secondary) border border-(--color-secondary)"
                     }`}
@@ -373,7 +373,7 @@ const RestaurantMenu = () => {
                       setModalMode("new");
                       setIsControlsModalOpen(true);
                     }}
-                    title={item.isNew ? "New Item" : "Mark as New"}
+                    title={item.isNewItemItem ? "New Item" : "Mark as New"}
                   >
                     New
                   </button>

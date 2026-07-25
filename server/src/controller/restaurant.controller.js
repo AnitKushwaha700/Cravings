@@ -283,7 +283,7 @@ export const RestaurantAddMenuItem = async (req, res, next) => {
       status,
       isTopRated,
       isRecommended,
-      isNew,
+      isNewItem,
       isDeleted,
     } = req.body;
     const itemImageFromFE = req.file;
@@ -297,7 +297,7 @@ export const RestaurantAddMenuItem = async (req, res, next) => {
       status,
       isTopRated,
       isRecommended,
-      isNew,
+      isNewItem,
       isDeleted,
       itemImageFromFE,
     });
@@ -355,7 +355,7 @@ export const RestaurantAddMenuItem = async (req, res, next) => {
         status,
         isTopRated,
         isRecommended,
-        isNew,
+        isNewItem,
         isDeleted,
         image: itemImage,
       });
@@ -376,7 +376,7 @@ export const RestaurantAddMenuItem = async (req, res, next) => {
         status,
         isTopRated,
         isRecommended,
-        isNew,
+        isNewItem,
         isDeleted,
         image: itemImage,
       };

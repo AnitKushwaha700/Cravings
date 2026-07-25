@@ -64,7 +64,7 @@ const MenuSchema = mongoose.Schema(
           },
           isTopRated: { type: Boolean, default: false },
           isRecommended: { type: Boolean, default: false },
-          isNew: { type: Boolean, default: false },
+          isNewItem: { type: Boolean, default: false },
           isDeleted: { type: Boolean, default: false },
         },
       ],

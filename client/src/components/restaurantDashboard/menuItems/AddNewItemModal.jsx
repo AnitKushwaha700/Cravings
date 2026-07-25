@@ -2,6 +2,7 @@ import React from "react";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import api from "../../../config/ApiConfig";
 import toast from "react-hot-toast";
+import { FaFileImage } from "react-icons/fa6";
 
 const itemCategories = [
   "Appetizer",
@@ -47,7 +48,7 @@ const AddNewItemModal = ({ isOpen, onClose }) => {
     status: "available",
     isTopRated: false,
     isRecommended: false,
-    isNew: true,
+    isNewItem: true,
     isDeleted: false,
   });
 
@@ -77,7 +78,7 @@ const AddNewItemModal = ({ isOpen, onClose }) => {
       formData.append("status", newItemFormData.status);
       formData.append("isTopRated", newItemFormData.isTopRated);
       formData.append("isRecommended", newItemFormData.isRecommended);
-      formData.append("isNew", newItemFormData.isNew);
+      formData.append("isNewItem", newItemFormData.isNewItem);
       formData.append("isDeleted", newItemFormData.isDeleted);
 
       if (itemImage) {
@@ -117,10 +118,7 @@ const AddNewItemModal = ({ isOpen, onClose }) => {
           <main>
             <form className=" space-y-4">
               <div className="grid grid-cols-3 gap-4">
-                <div className="col-span-1 space-x-0 space-y-2">
-                  <label className="block mb-1 font-medium" htmlFor="itemImage">
-                    Item Image
-                  </label>
+                <div className="col-span-1 space-x-0 space-y-2 border-2 border-amber-700 rounded-lg">
                   {previewImage && (
                     <div className="col-span-1">
                       <img
