@@ -13,7 +13,7 @@ import {
   RestaurantToggleMenuItemControl,
   RestaurantDeleteMenuItem,
 } from "../controller/restaurant.controller.js";
-import { RestaurantAuthProtect } from "../middleware/auth.middelware.js";
+import { RestaurantAuthProtect } from "../middleware/auth.middleware.js";
 
 const upload = multer();
 const router = express.Router();
