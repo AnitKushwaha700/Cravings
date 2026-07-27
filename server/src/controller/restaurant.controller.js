@@ -421,7 +421,7 @@ export const RestaurantMenuItems = async (req, res, next) => {
       return next(error);
     }
 
-    // console.log("Existing Menu Items:", existingMenuItem.menuItems);
+    console.log("Existing Menu Items:", existingMenuItem.menuItems);
 
     const activeMenuItems = existingMenuItem.menuItems.filter(
       (item) => !item.isDeleted,
