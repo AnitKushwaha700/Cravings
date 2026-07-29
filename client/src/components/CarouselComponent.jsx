@@ -9,8 +9,9 @@ import bgImage4 from "../assets/carousel/bgImage4.jpg";
 const CarouselComponent = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
+  const [mounted, setMounted] = useState(false);
+  const [wrapperRect, setWrapperRect] = useState({ top: 0, left: 0, width: 0, height: 0 });
   const wrapperRef = useRef(null);
-  const buttonPortalRef = useRef(null);
 
   const images = [bgImage1, bgImage2, bgImage3, bgImage4];
 
@@ -41,41 +42,55 @@ const CarouselComponent = () => {
   };
 
   useEffect(() => {
-    if (!wrapperRef.current) return;
+    setMounted(true);
+  }, []);
 
-    const portal = document.createElement("div");
-    portal.style.position = "absolute";
-    portal.style.inset = "0";
-    portal.style.pointerEvents = "none";
-    portal.style.zIndex = "20";
+  useEffect(() => {
+    const updateRect = () => {
+      if (!wrapperRef.current) return;
+      const rect = wrapperRef.current.getBoundingClientRect();
+      setWrapperRect({
+        top: rect.top,
+        left: rect.left,
+        width: rect.width,
+        height: rect.height,
+      });
+    };
 
-    const parent = wrapperRef.current.parentElement;
-    if (parent) {
-      parent.insertBefore(portal, wrapperRef.current.nextSibling);
-      buttonPortalRef.current = portal;
-    }
+    updateRect();
+    window.addEventListener("resize", updateRect);
+    window.addEventListener("scroll", updateRect, true);
 
     return () => {
-      if (buttonPortalRef.current?.parentElement) {
-        buttonPortalRef.current.parentElement.removeChild(buttonPortalRef.current);
-      }
+      window.removeEventListener("resize", updateRect);
+      window.removeEventListener("scroll", updateRect, true);
     };
   }, []);
 
   const renderButtons = () => (
-    <div className="absolute inset-0 pointer-events-none">
+    <div className="fixed inset-0 pointer-events-none z-50" aria-hidden="true">
       <button
         onClick={prevSlide}
-        className="pointer-events-auto absolute left-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white p-2 rounded-full transition backdrop-blur-sm"
+        className="pointer-events-auto absolute bg-white/30 hover:bg-white/50 text-white p-2 rounded-full transition backdrop-blur-sm"
         aria-label="Previous slide"
+        style={{
+          top: wrapperRect.top + wrapperRect.height / 2,
+          left: wrapperRect.left + 16,
+          transform: "translateY(-50%)",
+        }}
       >
         <IoChevronBack size={24} />
       </button>
 
       <button
         onClick={nextSlide}
-        className="pointer-events-auto absolute right-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white p-2 rounded-full transition backdrop-blur-sm"
+        className="pointer-events-auto absolute bg-white/30 hover:bg-white/50 text-white p-2 rounded-full transition backdrop-blur-sm"
         aria-label="Next slide"
+        style={{
+          top: wrapperRect.top + wrapperRect.height / 2,
+          left: wrapperRect.left + wrapperRect.width - 16,
+          transform: "translate(-100%, -50%)",
+        }}
       >
         <IoChevronForward size={24} />
       </button>
@@ -121,9 +136,7 @@ const CarouselComponent = () => {
         ))}
       </div>
 
-      {buttonPortalRef.current
-        ? createPortal(renderButtons(), buttonPortalRef.current)
-        : renderButtons()}
+      {mounted && createPortal(renderButtons(), document.body)}
     </div>
   );
 };
