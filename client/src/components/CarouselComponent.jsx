@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
-import { createPortal } from "react-dom";
 import bgImage1 from "../assets/carousel/bgImage1.jpg";
 import bgImage2 from "../assets/carousel/bgImage2.jpg";
 import bgImage3 from "../assets/carousel/bgImage3.jpg";
@@ -9,8 +8,6 @@ import bgImage4 from "../assets/carousel/bgImage4.jpg";
 const CarouselComponent = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
-  const [mounted, setMounted] = useState(false);
-  const [wrapperRect, setWrapperRect] = useState({ top: 0, left: 0, width: 0, height: 0 });
   const wrapperRef = useRef(null);
 
   const images = [bgImage1, bgImage2, bgImage3, bgImage4];
@@ -21,7 +18,7 @@ const CarouselComponent = () => {
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % images.length);
-    }, 5000); // Change slide every 5 seconds
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [autoPlay, images.length]);
@@ -41,62 +38,6 @@ const CarouselComponent = () => {
     setAutoPlay(false);
   };
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    const updateRect = () => {
-      if (!wrapperRef.current) return;
-      const rect = wrapperRef.current.getBoundingClientRect();
-      setWrapperRect({
-        top: rect.top,
-        left: rect.left,
-        width: rect.width,
-        height: rect.height,
-      });
-    };
-
-    updateRect();
-    window.addEventListener("resize", updateRect);
-    window.addEventListener("scroll", updateRect, true);
-
-    return () => {
-      window.removeEventListener("resize", updateRect);
-      window.removeEventListener("scroll", updateRect, true);
-    };
-  }, []);
-
-  const renderButtons = () => (
-    <div className="fixed inset-0 pointer-events-none z-50" aria-hidden="true">
-      <button
-        onClick={prevSlide}
-        className="pointer-events-auto absolute bg-white/30 hover:bg-white/50 text-white p-2 rounded-full transition backdrop-blur-sm"
-        aria-label="Previous slide"
-        style={{
-          top: wrapperRect.top + wrapperRect.height / 2,
-          left: wrapperRect.left + 16,
-          transform: "translateY(-50%)",
-        }}
-      >
-        <IoChevronBack size={24} />
-      </button>
-
-      <button
-        onClick={nextSlide}
-        className="pointer-events-auto absolute bg-white/30 hover:bg-white/50 text-white p-2 rounded-full transition backdrop-blur-sm"
-        aria-label="Next slide"
-        style={{
-          top: wrapperRect.top + wrapperRect.height / 2,
-          left: wrapperRect.left + wrapperRect.width - 16,
-          transform: "translate(-100%, -50%)",
-        }}
-      >
-        <IoChevronForward size={24} />
-      </button>
-    </div>
-  );
-
   return (
     <div
       ref={wrapperRef}
@@ -104,39 +45,56 @@ const CarouselComponent = () => {
       onMouseEnter={() => setAutoPlay(false)}
       onMouseLeave={() => setAutoPlay(true)}
     >
-      {/* Carousel Slides */}
-      {images.map((image, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            index === currentSlide ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <img
-            src={image}
-            alt={`Slide ${index + 1}`}
-            className="w-full h-full object-cover"
-          />
-        </div>
-      ))}
+      {/* Sliding container */}
+      <div
+        className="flex h-full"
+        style={{
+          width: `${images.length * 100}%`,
+          transform: `translateX(-${currentSlide * (100 / images.length)}%)`,
+          transition: "transform 700ms ease-in-out",
+        }}
+      >
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className="flex-shrink-0 h-full"
+            style={{ width: `${100 / images.length}%` }}
+          >
+            <img src={image} alt={`Slide ${index + 1}`} className="w-full h-full object-cover" />
+          </div>
+        ))}
+      </div>
+
+      {/* Prev / Next buttons inside wrapper */}
+      <button
+        onClick={prevSlide}
+        aria-label="Previous slide"
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white p-2 rounded-full transition backdrop-blur-sm z-20"
+      >
+        <IoChevronBack size={24} />
+      </button>
+
+      <button
+        onClick={nextSlide}
+        aria-label="Next slide"
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white p-2 rounded-full transition backdrop-blur-sm z-20"
+      >
+        <IoChevronForward size={24} />
+      </button>
 
       {/* Dot Indicators */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-30">
         {images.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-2 h-2 rounded-full transition ${
-              index === currentSlide
-                ? "bg-white w-8"
-                : "bg-white/50 hover:bg-white/75"
+            className={`h-2 rounded-full transition-all duration-300 ${
+              index === currentSlide ? "bg-white w-8" : "bg-white/50 w-2 hover:bg-white/75"
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
-
-      {mounted && createPortal(renderButtons(), document.body)}
     </div>
   );
 };
