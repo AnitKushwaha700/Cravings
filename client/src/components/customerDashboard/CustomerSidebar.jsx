@@ -12,6 +12,7 @@ const CustomerSidebar = ({ activeTab, setActiveTab }) => {
 
   const settingsTab = { name: "Settings", value: "settings", icon: <IoMdSettings /> };
 
+
   const renderTab = (tab) => (
     <li
       key={tab.value}
