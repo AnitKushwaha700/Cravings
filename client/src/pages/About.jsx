@@ -10,6 +10,7 @@ import {
   FaStar,
 } from "react-icons/fa";
 import aboutImage from "../assets/aboutPage.png";
+import circleLogo from "../assets/circleLogo.png";
 
 const About = () => {
   return (
@@ -25,10 +26,10 @@ const About = () => {
 
         <div className="relative z-10 flex flex-col items-center text-center px-4">
           <div className="bg-white rounded-full mb-6">
-            <img
-              src="/circleLogo.png"
-              alt="Cravings Logo"
-              className="w-20 h-20 rounded-full"
+            <img 
+            src={circleLogo}
+            alt="circleLogo"
+            className="h-20 w-20 rounded-full"
             />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
