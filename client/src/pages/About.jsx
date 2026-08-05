@@ -35,18 +35,18 @@ const About = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             About <span className="text-[#BA410C]">Cravings</span>
           </h1>
-          <p className="text-lg md:text-xl max-w-2xl text-gray-200">
+          <p className="text-md md:text-xl max-w-2xl text-gray-200">
             Connecting hungry hearts with amazing food — one delivery at a time.
           </p>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="bg-(--color-star) text-white py-6">
+      <section className="bg-(--color-neutral) text-white py-7">
         <div className="container mx-auto px-4 max-w-5xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-[#BA410C] mb-2">
+              <div className="text-2xl md:text-4xl font-bold text-[#BA410C] mb-2">
                 50K+
               </div>
               <div className="text-sm md:text-base text-white">
@@ -54,7 +54,7 @@ const About = () => {
               </div>
             </div>
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-[#BA410C] mb-2">
+              <div className="text-2xl md:text-4xl font-bold text-[#BA410C] mb-2">
                 1,200+
               </div>
               <div className="text-sm md:text-base text-white">
@@ -62,7 +62,7 @@ const About = () => {
               </div>
             </div>
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-[#BA410C] mb-2">
+              <div className="text-2xl md:text-4xl font-bold text-[#BA410C] mb-2">
                 3,500+
               </div>
               <div className="text-sm md:text-base text-white">
@@ -70,7 +70,7 @@ const About = () => {
               </div>
             </div>
             <div>
-              <div className="text-3xl md:text-4xl font-bold text-[#BA410C] mb-2 flex justify-center items-center gap-2">
+              <div className="text-2xl md:text-4xl font-bold text-[#BA410C] mb-2 flex justify-center items-center gap-2">
                 <FaStar className="text-yellow-400" /> 4.8
               </div>
               <div className="text-sm md:text-base text-white">
