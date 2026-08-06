@@ -4,10 +4,10 @@ import connectDB from "./src/config/dbConnection.config.js";
 import AuthRouter from "./src/router/auth.route.js";
 import PublicRouter from "./src/router/public.route.js";
 import CommonRouter from "./src/router/common.route.js";
-import RestaurantRouter from "./src/router/restaurant.route.js";
 import AdminRouter from "./src/router/admin.route.js";
 import RiderRouter from "./src/router/rider.route.js";
 import CustomerRouter from "./src/router/customer.route.js";
+import RestaurantRouter from "./src/router/restaurant.route.js";
 
 import morgan from "morgan";
 import cors from "cors";
