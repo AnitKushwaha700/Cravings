@@ -17,11 +17,11 @@ const About = () => {
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center justify-center text-white bg-cover bg-center">
-        {/* <img
+        <img
           src={aboutImage}
           alt="About"
           className="absolute inset-0 w-full h-full object-cover"
-        /> */}
+        />
         <div className="absolute inset-0 bg-black/60"></div>
 
         <div className="relative z-10 flex flex-col items-center text-center px-4">
